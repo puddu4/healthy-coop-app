@@ -279,7 +279,7 @@
   // ---------- Load products (with offline fallback) ----------
   function loadProducts(){
     var statusLine = document.getElementById("statusLine");
-    var SHARD_COUNT = 9;
+    var SHARD_COUNT = 10;
     var shardUrls = [];
     for (var i = 0; i < SHARD_COUNT; i++) shardUrls.push("data/products_" + i + ".json");
     Promise.all(shardUrls.map(function(u){
