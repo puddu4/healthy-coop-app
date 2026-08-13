@@ -105,6 +105,10 @@
   .card .tags { display: flex; flex-wrap: wrap; gap: 3px; }
   .tag { font-size: 0.62rem; background: #eef3ee; color: var(--green); padding: 2px 6px; border-radius: 6px; }
   .tag.bio { background: #eef7e6; color: #4c7a1f; }
+  .tag.eco { font-weight: 700; }
+  .tag.eco.eco-good { background: #e5f5ea; color: #1e7a3c; }
+  .tag.eco.eco-mid { background: #fdf3d9; color: #8a6a10; }
+  .tag.eco.eco-bad { background: #fbe6e6; color: #b4302f; }
   .card .nutri { font-size: 0.68rem; color: var(--muted); }
   .card button {
     margin-top: auto;
@@ -190,7 +194,7 @@
   <section class="view active" id="view-products">
     <div class="filter-bar">
       <input type="search" id="searchInput" placeholder="Produkt oder Kategorie suchen (z.B. Milch)…">
-      <div class="note" style="margin-top:-4px;">Treffer werden nach gesund &amp; fair sortiert – die beste Wahl zuerst.</div>
+      <div class="note" style="margin-top:-4px;">Treffer werden nach gesund, fair &amp; öko sortiert – die beste Wahl zuerst.</div>
 
       <div class="chip-label">Kategorie</div>
       <div class="chip-group" id="categoryChips"></div>
@@ -390,8 +394,25 @@
     return labels.filter(function(w){ return FAIR_LABELS.has(w); }).length;
   }
 
+  // "Öko" = Coop Eco-Score (Umweltbelastung: Anbau, Verarbeitung, Verpackung, Transport), A+ (bester) bis E (schlechtester).
+  var ECO_GRADE_VALUES = {
+    A_plus: 10, A: 9, A_minus: 8.5,
+    B_plus: 7.5, B: 6.5, B_minus: 6,
+    C_plus: 5, C: 4, C_minus: 3.5,
+    D_plus: 2.5, D: 1.5, D_minus: 1,
+    E_plus: 0.5, E: 0, E_minus: 0
+  };
+  function ecoScore(p){
+    if (!p.eco_score || !(p.eco_score in ECO_GRADE_VALUES)) return 0;
+    return ECO_GRADE_VALUES[p.eco_score] - 5; // zentriert um 0 (C ≈ neutral)
+  }
+  function ecoLabel(p){
+    if (!p.eco_score) return null;
+    return "Eco " + p.eco_score.replace("_plus", "+").replace("_minus", "-");
+  }
+
   function combinedScore(p){
-    return healthScore(p) + fairScore(p) * 5;
+    return healthScore(p) + fairScore(p) * 5 + ecoScore(p) * 2;
   }
 
   function matchesFilters(p){
@@ -441,7 +462,12 @@
     var card = document.createElement("div");
     card.className = "card";
     var n = p.nutrition_per_100g || {};
-    var tagsHtml = (p.diet||[]).concat(p.welfare_sustainability||[]).slice(0,3)
+    var eLabel = ecoLabel(p);
+    var ecoClass = "eco-mid";
+    if (eLabel && /A/.test(p.eco_score)) ecoClass = "eco-good";
+    else if (eLabel && /[DE]/.test(p.eco_score)) ecoClass = "eco-bad";
+    var ecoHtml = eLabel ? '<span class="tag eco ' + ecoClass + '">' + eLabel + '</span>' : "";
+    var tagsHtml = ecoHtml + (p.diet||[]).concat(p.welfare_sustainability||[]).slice(0,3)
       .map(function(t){ return '<span class="tag' + (t==="Bio Suisse"?" bio":"") + '">' + t + '</span>'; }).join("");
     card.innerHTML =
       '<img src="' + p.image + '" loading="lazy" onerror="this.style.opacity=0.2">' +
