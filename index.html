@@ -285,7 +285,7 @@
   // ---------- Load products (with offline fallback) ----------
   function loadProducts(){
     var statusLine = document.getElementById("statusLine");
-    var SHARD_COUNT = 10;
+    var SHARD_COUNT = 11;
     var shardUrls = [];
     for (var i = 0; i < SHARD_COUNT; i++) shardUrls.push("data/products_" + i + ".json");
     Promise.all(shardUrls.map(function(u){
@@ -390,7 +390,7 @@
   }
 
   // "Fair" = Fairtrade- und Tierwohl-Labels über das Bio-Suisse-Grundlabel hinaus.
-  var FAIR_LABELS = new Set(["Fairtrade", "Naturafarm/Natura-Beef", "IP-Suisse", "Demeter", "MSC"]);
+  var FAIR_LABELS = new Set(["Fairtrade", "Naturafarm/Natura-Beef", "IP-Suisse", "Demeter", "MSC", "Label Rouge"]);
   function fairScore(p){
     var labels = p.welfare_sustainability || [];
     return labels.filter(function(w){ return FAIR_LABELS.has(w); }).length;
