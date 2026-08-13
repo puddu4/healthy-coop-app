@@ -458,17 +458,51 @@
   }
 
   // ---------- Render product grid ----------
+  // Sinnvolle Einkaufs-Reihenfolge: frische Produkte zuerst, Vorräte/Getränke danach, Sonstiges zuletzt.
+  var CATEGORY_ORDER = ["Gemüse", "Früchte", "Fleisch & Fisch", "Milchprodukte", "Eier", "Brot & Backwaren", "Vorräte & Gewürze", "Getränke", "Sonstiges"];
+
+  function groupByCategory(list){
+    var map = {};
+    list.forEach(function(p){
+      var c = p.category || "Sonstiges";
+      if (!map[c]) map[c] = [];
+      map[c].push(p);
+    });
+    var known = CATEGORY_ORDER.filter(function(c){ return map[c]; });
+    var extra = Object.keys(map).filter(function(c){ return CATEGORY_ORDER.indexOf(c) === -1; }).sort();
+    return known.concat(extra).map(function(c){ return { category: c, items: map[c] }; });
+  }
+
   function renderProducts(){
     var grid = document.getElementById("productGrid");
     var list = getFilteredProducts();
     grid.innerHTML = "";
     if (list.length === 0) {
+      grid.classList.add("grid");
       grid.innerHTML = '<div class="empty">Keine Produkte gefunden.</div>';
       return;
     }
-    list.forEach(function(p){
-      grid.appendChild(productCard(p));
-    });
+    if (STATE.filters.category === null) {
+      // Bei "Alle" mischen sich mehrere Kategorien -> nach Kategorie gruppiert anzeigen,
+      // damit man z.B. nicht Joghurt zwischen Fleisch und Gemüse findet.
+      grid.classList.remove("grid");
+      groupByCategory(list).forEach(function(g){
+        var heading = document.createElement("div");
+        heading.className = "section-title";
+        heading.textContent = g.category;
+        grid.appendChild(heading);
+        var sub = document.createElement("div");
+        sub.className = "grid";
+        g.items.forEach(function(p){ sub.appendChild(productCard(p)); });
+        grid.appendChild(sub);
+      });
+    } else {
+      // Eine einzelne Kategorie ist bereits gefiltert -> keine zusätzliche Gruppierung nötig.
+      grid.classList.add("grid");
+      list.forEach(function(p){
+        grid.appendChild(productCard(p));
+      });
+    }
   }
 
   function productCard(p){
