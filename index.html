@@ -1,645 +1,644 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Healthy Coop</title>
-  <link rel="manifest" href="manifest.json">
-  <link rel="icon" href="icon.svg">
-  <meta name="theme-color" content="#e2001a">
-  <style>
-      :root {
-            --red: #e2001a;
-            --bg: #f6f5f1;
-            --card: #ffffff;
-            --text: #22201d;
-            --muted: #6b6a67;
-            --border: #e4e1da;
-            --green: #2f7d4f;
-      }
-      * { box-sizing: border-box; }
-      body {
-            margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            padding-bottom: 70px;
-      }
-      header {
-            background: var(--red);
-            color: white;
-            padding: 16px 16px 12px;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-      }
-      header h1 { margin: 0; font-size: 1.3rem; }
-      header .status { font-size: 0.75rem; opacity: 0.9; margin-top: 2px; }
-      nav.tabs {
-            display: flex;
-            background: white;
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 56px;
-            z-index: 9;
-      }
-      nav.tabs button {
-            flex: 1;
-            padding: 12px 4px;
-            background: none;
-            border: none;
-            font-size: 0.85rem;
-            color: var(--muted);
-            border-bottom: 3px solid transparent;
-            cursor: pointer;
-      }
-      nav.tabs button.active {
-            color: var(--red);
-            border-bottom-color: var(--red);
-            font-weight: 600;
-      }
-      main { padding: 12px; max-width: 900px; margin: 0 auto; }
-      .view { display: none; }
-      .view.active { display: block; }
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Healthy Coop</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon.svg">
+<meta name="theme-color" content="#e2001a">
+<style>
+  :root {
+    --red: #e2001a;
+    --bg: #f6f5f1;
+    --card: #ffffff;
+    --text: #22201d;
+    --muted: #6b6a67;
+    --border: #e4e1da;
+    --green: #2f7d4f;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding-bottom: 70px;
+  }
+  header {
+    background: var(--red);
+    color: white;
+    padding: 16px 16px 12px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  header h1 { margin: 0; font-size: 1.3rem; }
+  header .status { font-size: 0.75rem; opacity: 0.9; margin-top: 2px; }
+  nav.tabs {
+    display: flex;
+    background: white;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 56px;
+    z-index: 9;
+  }
+  nav.tabs button {
+    flex: 1;
+    padding: 12px 4px;
+    background: none;
+    border: none;
+    font-size: 0.85rem;
+    color: var(--muted);
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+  }
+  nav.tabs button.active {
+    color: var(--red);
+    border-bottom-color: var(--red);
+    font-weight: 600;
+  }
+  main { padding: 12px; max-width: 900px; margin: 0 auto; }
+  .view { display: none; }
+  .view.active { display: block; }
 
-      input[type=text], input[type=search], input[type=url], textarea, select {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            font-size: 0.95rem;
-            background: white;
-            color: var(--text);
-      }
-      textarea { resize: vertical; min-height: 90px; font-family: inherit; }
-      label.field { display: block; margin-bottom: 10px; font-size: 0.85rem; color: var(--muted); }
+  input[type=text], input[type=search], input[type=url], textarea, select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 0.95rem;
+    background: white;
+    color: var(--text);
+  }
+  textarea { resize: vertical; min-height: 90px; font-family: inherit; }
+  label.field { display: block; margin-bottom: 10px; font-size: 0.85rem; color: var(--muted); }
 
-      .filter-bar { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
-      .chip-group { display: flex; flex-wrap: wrap; gap: 6px; }
-      .chip {
-            padding: 6px 12px;
-            border-radius: 999px;
-            border: 1px solid var(--border);
-            background: white;
-            font-size: 0.78rem;
-            cursor: pointer;
-            color: var(--text);
-            user-select: none;
-      }
-      .chip.active { background: var(--green); border-color: var(--green); color: white; }
-      .chip-label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; margin-top: 4px; }
+  .filter-bar { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+  .chip-group { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip {
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: white;
+    font-size: 0.78rem;
+    cursor: pointer;
+    color: var(--text);
+    user-select: none;
+  }
+  .chip.active { background: var(--green); border-color: var(--green); color: white; }
+  .chip-label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; margin-top: 4px; }
 
-      .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
-      .card {
-            background: var(--card);
-            border-radius: 14px;
-            border: 1px solid var(--border);
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-      }
-      .card img { width: 100%; aspect-ratio: 1; object-fit: contain; border-radius: 8px; background: #fafafa; }
-      .card .name { font-size: 0.82rem; font-weight: 600; line-height: 1.2; min-height: 2.4em; }
-      .card .price { font-size: 0.85rem; color: var(--red); font-weight: 700; }
-      .card .tags { display: flex; flex-wrap: wrap; gap: 3px; }
-      .tag { font-size: 0.62rem; background: #eef3ee; color: var(--green); padding: 2px 6px; border-radius: 6px; }
-      .tag.bio { background: #eef7e6; color: #4c7a1f; }
-      .card .nutri { font-size: 0.68rem; color: var(--muted); }
-      .card button {
-            margin-top: auto;
-            padding: 8px;
-            border: none;
-            border-radius: 8px;
-            background: var(--red);
-            color: white;
-            font-size: 0.78rem;
-            cursor: pointer;
-      }
-      .card button:active { opacity: 0.8; }
-      .empty { text-align: center; color: var(--muted); padding: 40px 10px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+  .card {
+    background: var(--card);
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .card img { width: 100%; aspect-ratio: 1; object-fit: contain; border-radius: 8px; background: #fafafa; }
+  .card .name { font-size: 0.82rem; font-weight: 600; line-height: 1.2; min-height: 2.4em; }
+  .card .price { font-size: 0.85rem; color: var(--red); font-weight: 700; }
+  .card .tags { display: flex; flex-wrap: wrap; gap: 3px; }
+  .tag { font-size: 0.62rem; background: #eef3ee; color: var(--green); padding: 2px 6px; border-radius: 6px; }
+  .tag.bio { background: #eef7e6; color: #4c7a1f; }
+  .card .nutri { font-size: 0.68rem; color: var(--muted); }
+  .card button {
+    margin-top: auto;
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
+    background: var(--red);
+    color: white;
+    font-size: 0.78rem;
+    cursor: pointer;
+  }
+  .card button:active { opacity: 0.8; }
+  .empty { text-align: center; color: var(--muted); padding: 40px 10px; }
 
-      .section-title { font-size: 1rem; font-weight: 700; margin: 18px 0 8px; }
-      .card.list { flex-direction: row; align-items: center; }
-      .card.list img { width: 56px; height: 56px; flex-shrink: 0; }
-      .card.list .info { flex: 1; min-width: 0; }
-      .card.list .name { min-height: 0; }
+  .section-title { font-size: 1rem; font-weight: 700; margin: 18px 0 8px; }
+  .card.list { flex-direction: row; align-items: center; }
+  .card.list img { width: 56px; height: 56px; flex-shrink: 0; }
+  .card.list .info { flex: 1; min-width: 0; }
+  .card.list .name { min-height: 0; }
 
-      .btn-primary {
-            background: var(--red); color: white; border: none; border-radius: 10px;
-            padding: 12px; font-size: 0.9rem; cursor: pointer; width: 100%;
-      }
-      .btn-secondary {
-            background: white; color: var(--text); border: 1px solid var(--border); border-radius: 10px;
-            padding: 10px; font-size: 0.85rem; cursor: pointer;
-      }
-      .match-row {
-            background: white; border: 1px solid var(--border); border-radius: 10px; padding: 10px; margin-bottom: 8px;
-      }
-      .match-row .ingredient-line { font-size: 0.8rem; color: var(--muted); margin-bottom: 6px; }
-      .match-candidates { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; }
-      .match-candidates .cand {
-            flex-shrink: 0; width: 110px; border: 1px solid var(--border); border-radius: 8px; padding: 6px; text-align: center; cursor: pointer; background: #fafaf8;
-      }
-      .match-candidates .cand.picked { border-color: var(--green); background: #eef7ee; }
-      .match-candidates .cand img { width: 100%; aspect-ratio: 1; object-fit: contain; }
-      .match-candidates .cand .n { font-size: 0.62rem; line-height: 1.15; height: 2.3em; overflow: hidden; }
+  .btn-primary {
+    background: var(--red); color: white; border: none; border-radius: 10px;
+    padding: 12px; font-size: 0.9rem; cursor: pointer; width: 100%;
+  }
+  .btn-secondary {
+    background: white; color: var(--text); border: 1px solid var(--border); border-radius: 10px;
+    padding: 10px; font-size: 0.85rem; cursor: pointer;
+  }
+  .match-row {
+    background: white; border: 1px solid var(--border); border-radius: 10px; padding: 10px; margin-bottom: 8px;
+  }
+  .match-row .ingredient-line { font-size: 0.8rem; color: var(--muted); margin-bottom: 6px; }
+  .match-candidates { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; }
+  .match-candidates .cand {
+    flex-shrink: 0; width: 110px; border: 1px solid var(--border); border-radius: 8px; padding: 6px; text-align: center; cursor: pointer; background: #fafaf8;
+  }
+  .match-candidates .cand.picked { border-color: var(--green); background: #eef7ee; }
+  .match-candidates .cand img { width: 100%; aspect-ratio: 1; object-fit: contain; }
+  .match-candidates .cand .n { font-size: 0.62rem; line-height: 1.15; height: 2.3em; overflow: hidden; }
 
-      .shopping-item { display: flex; align-items: center; gap: 10px; background: white; border: 1px solid var(--border); border-radius: 10px; padding: 10px; margin-bottom: 8px; }
-      .shopping-item.checked { opacity: 0.5; }
-      .shopping-item .name { flex: 1; font-size: 0.88rem; }
-      .shopping-item .name.checked { text-decoration: line-through; }
-      .shopping-item button.remove { background: none; border: none; color: var(--muted); font-size: 1.1rem; cursor: pointer; }
-      input[type=checkbox] { width: 20px; height: 20px; accent-color: var(--green); }
+  .shopping-item { display: flex; align-items: center; gap: 10px; background: white; border: 1px solid var(--border); border-radius: 10px; padding: 10px; margin-bottom: 8px; }
+  .shopping-item.checked { opacity: 0.5; }
+  .shopping-item .name { flex: 1; font-size: 0.88rem; }
+  .shopping-item .name.checked { text-decoration: line-through; }
+  .shopping-item button.remove { background: none; border: none; color: var(--muted); font-size: 1.1rem; cursor: pointer; }
+  input[type=checkbox] { width: 20px; height: 20px; accent-color: var(--green); }
 
-      .tabbar-import { display: flex; gap: 6px; margin-bottom: 14px; }
-      .tabbar-import button {
-            flex: 1; padding: 8px; border-radius: 8px; border: 1px solid var(--border); background: white; font-size: 0.78rem; cursor: pointer;
-      }
-      .tabbar-import button.active { background: var(--text); color: white; border-color: var(--text); }
-      .import-panel { display: none; }
-      .import-panel.active { display: block; }
-      .note { font-size: 0.75rem; color: var(--muted); margin-top: 6px; line-height: 1.4; }
-      #photoPreview { max-width: 100%; border-radius: 10px; margin-top: 8px; display: none; }
-      .spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid #ccc; border-top-color: var(--red); border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: -2px; }
-      @keyframes spin { to { transform: rotate(360deg); } }
-      .toast {
-            position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%);
-            background: var(--text); color: white; padding: 10px 18px; border-radius: 999px; font-size: 0.82rem;
-            opacity: 0; pointer-events: none; transition: opacity 0.25s; z-index: 100;
-      }
-      .toast.show { opacity: 1; }
-    </style>
-  </head>
-  <body>
+  .tabbar-import { display: flex; gap: 6px; margin-bottom: 14px; }
+  .tabbar-import button {
+    flex: 1; padding: 8px; border-radius: 8px; border: 1px solid var(--border); background: white; font-size: 0.78rem; cursor: pointer;
+  }
+  .tabbar-import button.active { background: var(--text); color: white; border-color: var(--text); }
+  .import-panel { display: none; }
+  .import-panel.active { display: block; }
+  .note { font-size: 0.75rem; color: var(--muted); margin-top: 6px; line-height: 1.4; }
+  #photoPreview { max-width: 100%; border-radius: 10px; margin-top: 8px; display: none; }
+  .spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid #ccc; border-top-color: var(--red); border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: -2px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .toast {
+    position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%);
+    background: var(--text); color: white; padding: 10px 18px; border-radius: 999px; font-size: 0.82rem;
+    opacity: 0; pointer-events: none; transition: opacity 0.25s; z-index: 100;
+  }
+  .toast.show { opacity: 1; }
+</style>
+</head>
+<body>
 
-    <header>
-        <h1>Healthy Coop</h1>
-      <div class="status" id="statusLine">Lade Produkte…</div>div>
-    </header>
-  
-  <nav class="tabs">
-    <button data-view="products" class="active">Produkte</button>button>
-    <button data-view="recipe">Rezept</button>button>
-    <button data-view="list">Einkaufsliste</button>button>
-  </nav>nav>
-  
-  <main>
+<header>
+  <h1>Healthy Coop</h1>
+  <div class="status" id="statusLine">Lade Produkte…</div>
+</header>
 
-      <!-- PRODUCTS VIEW -->
-      <section class="view active" id="view-products">
-            <div class="filter-bar">
-                    <input type="search" id="searchInput" placeholder="Produkt suchen…">
+<nav class="tabs">
+  <button data-view="products" class="active">Produkte</button>
+  <button data-view="recipe">Rezept</button>
+  <button data-view="list">Einkaufsliste</button>
+</nav>
 
-                    <div class="chip-label">Kategorie</div>div>
-                    <div class="chip-group" id="categoryChips"></div>div>
+<main>
 
-                    <div class="chip-label">Ernährungsweise</div>div>
-                    <div class="chip-group" id="dietChips"></div>div>
+  <!-- PRODUCTS VIEW -->
+  <section class="view active" id="view-products">
+    <div class="filter-bar">
+      <input type="search" id="searchInput" placeholder="Produkt suchen…">
 
-                    <div class="chip-label">Tierwohl &amp; Nachhaltigkeit</div>div>
-                    <div class="chip-group" id="welfareChips"></div>div>
-            </div>div>
+      <div class="chip-label">Kategorie</div>
+      <div class="chip-group" id="categoryChips"></div>
 
-            <div class="grid" id="productGrid"></div>div>
-      </section>section>
+      <div class="chip-label">Ernährungsweise</div>
+      <div class="chip-group" id="dietChips"></div>
 
-      <!-- RECIPE VIEW -->
-      <section class="view" id="view-recipe">
-            <div class="tabbar-import">
-                    <button data-import="text" class="active">Text</button>button>
-                    <button data-import="url">Link</button>button>
-                    <button data-import="photo">Foto</button>button>
-            </div>div>
+      <div class="chip-label">Tierwohl &amp; Nachhaltigkeit</div>
+      <div class="chip-group" id="welfareChips"></div>
+    </div>
 
-            <div class="import-panel active" id="import-text">
-                    <label class="field">Zutatenliste einfügen (eine Zeile pro Zutat)</label>label>
-                    <textarea id="recipeText" placeholder="z.B.&#10;200g Naturaplan Bio Karotten&#10;2 Eier&#10;1 Bio Zwiebel"></textarea>
-                    <br><br>
-                    <button class="btn-primary" id="parseTextBtn">Zutaten erkennen</button>button>
-            </div>div>
+    <div class="grid" id="productGrid"></div>
+  </section>
 
-            <div class="import-panel" id="import-url">
-                    <label class="field">Link zu einem Rezept</label>label>
-                    <input type="url" id="recipeUrl" placeholder="https://...">
-                    <br><br>
-                    <button class="btn-primary" id="parseUrlBtn">Rezept laden</button>button>
-                    <div class="note">Funktioniert nur bei Seiten, die einen Fremdzugriff erlauben – klappt nicht bei jeder Website. Falls es fehlschlägt, Text direkt einfügen.</div>div>
-            </div>div>
+  <!-- RECIPE VIEW -->
+  <section class="view" id="view-recipe">
+    <div class="tabbar-import">
+      <button data-import="text" class="active">Text</button>
+      <button data-import="url">Link</button>
+      <button data-import="photo">Foto</button>
+    </div>
 
-            <div class="import-panel" id="import-photo">
-                    <label class="field">Foto/Screenshot eines Rezepts</label>label>
-                    <input type="file" id="photoInput" accept="image/*">
-                    <img id="photoPreview">
-                    <br><br>
-                    <button class="btn-primary" id="parsePhotoBtn">Text aus Foto erkennen</button>button>
-                    <div class="note">Texterkennung läuft direkt im Browser (kostenlos, kann bei unscharfen Fotos ungenau sein).</div>div>
-            </div>div>
+    <div class="import-panel active" id="import-text">
+      <label class="field">Zutatenliste einfügen (eine Zeile pro Zutat)</label>
+      <textarea id="recipeText" placeholder="z.B.&#10;200g Naturaplan Bio Karotten&#10;2 Eier&#10;1 Bio Zwiebel"></textarea>
+      <br><br>
+      <button class="btn-primary" id="parseTextBtn">Zutaten erkennen</button>
+    </div>
 
-            <div id="recipeStatus" class="note"></div>div>
+    <div class="import-panel" id="import-url">
+      <label class="field">Link zu einem Rezept</label>
+      <input type="url" id="recipeUrl" placeholder="https://...">
+      <br><br>
+      <button class="btn-primary" id="parseUrlBtn">Rezept laden</button>
+      <div class="note">Funktioniert nur bei Seiten, die einen Fremdzugriff erlauben – klappt nicht bei jeder Website. Falls es fehlschlägt, Text direkt einfügen.</div>
+    </div>
 
-            <div id="matchResults"></div>div>
-      </section>section>
+    <div class="import-panel" id="import-photo">
+      <label class="field">Foto/Screenshot eines Rezepts</label>
+      <input type="file" id="photoInput" accept="image/*">
+      <img id="photoPreview">
+      <br><br>
+      <button class="btn-primary" id="parsePhotoBtn">Text aus Foto erkennen</button>
+      <div class="note">Texterkennung läuft direkt im Browser (kostenlos, kann bei unscharfen Fotos ungenau sein).</div>
+    </div>
 
-      <!-- SHOPPING LIST VIEW -->
-      <section class="view" id="view-list">
-            <div id="shoppingListEmpty" class="empty">Deine Einkaufsliste ist leer.</div>div>
-            <div id="shoppingListItems"></div>div>
-            <br>
-            <button class="btn-secondary" id="clearCheckedBtn" style="display:none;">Erledigte entfernen</button>button>
-      </section>section>
+    <div id="recipeStatus" class="note"></div>
 
-  </main>
+    <div id="matchResults"></div>
+  </section>
 
-    <div class="toast" id="toast"></div>div>
+  <!-- SHOPPING LIST VIEW -->
+  <section class="view" id="view-list">
+    <div id="shoppingListEmpty" class="empty">Deine Einkaufsliste ist leer.</div>
+    <div id="shoppingListItems"></div>
+    <br>
+    <button class="btn-secondary" id="clearCheckedBtn" style="display:none;">Erledigte entfernen</button>
+  </section>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/4.1.1/tesseract.min.js"></script>
-    <script>
-      (function(){
-          "use strict";
+</main>
 
-          var STATE = {
-                products: [],
-                filters: { search: "", category: null, diet: new Set(), welfare: new Set() },
-                shoppingList: JSON.parse(localStorage.getItem("hc_shopping") || "[]")
-          };
+<div class="toast" id="toast"></div>
 
-          function toast(msg){
-                var t = document.getElementById("toast");
-                t.textContent = msg;
-                t.classList.add("show");
-                setTimeout(function(){ t.classList.remove("show"); }, 1800);
-          }
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/4.1.1/tesseract.min.js"></script>
+<script>
+(function(){
+  "use strict";
 
-          function saveShoppingList(){
-                localStorage.setItem("hc_shopping", JSON.stringify(STATE.shoppingList));
-          }
+  var STATE = {
+    products: [],
+    filters: { search: "", category: null, diet: new Set(), welfare: new Set() },
+    shoppingList: JSON.parse(localStorage.getItem("hc_shopping") || "[]")
+  };
 
-          // ---------- Load products (with offline fallback) ----------
-          function loadProducts(){
-                var statusLine = document.getElementById("statusLine");
-                var SHARD_COUNT = 8;
-                var shardUrls = [];
-                for (var i = 0; i < SHARD_COUNT; i++) shardUrls.push("data/products_" + i + ".json");
-                Promise.all(shardUrls.map(function(u){
-                        return fetch(u, { cache: "no-store" }).then(function(r){ if(!r.ok) throw new Error("http"); return r.json(); });
-                }))
-                  .then(function(shards){
-                            var data = [].concat.apply([], shards);
-                            STATE.products = data;
-                            localStorage.setItem("hc_products_cache", JSON.stringify(data));
-                            localStorage.setItem("hc_products_cache_date", new Date().toISOString());
-                            statusLine.textContent = data.length + " Produkte geladen";
-                            initFilters();
-                            renderProducts();
-                  })
-                  .catch(function(){
-                            var cached = localStorage.getItem("hc_products_cache");
-                            if (cached) {
-                                        STATE.products = JSON.parse(cached);
-                                        var d = localStorage.getItem("hc_products_cache_date");
-                                        statusLine.textContent = "Offline – letzter Stand vom " + (d ? new Date(d).toLocaleDateString("de-CH") : "?");
-                                        initFilters();
-                                        renderProducts();
-                            } else {
-                                        statusLine.textContent = "Keine Verbindung und kein Offline-Backup vorhanden.";
-                            }
-                  });
-          }
+  function toast(msg){
+    var t = document.getElementById("toast");
+    t.textContent = msg;
+    t.classList.add("show");
+    setTimeout(function(){ t.classList.remove("show"); }, 1800);
+  }
 
-          // ---------- Filters ----------
-          function initFilters(){
-                var cats = Array.from(new Set(STATE.products.map(function(p){ return p.category; }))).sort();
-                var catWrap = document.getElementById("categoryChips");
-                catWrap.innerHTML = "";
-                var allChip = makeChip("Alle", STATE.filters.category === null, function(){
-                        STATE.filters.category = null; refreshChipStates(); renderProducts();
-                });
-                catWrap.appendChild(allChip);
-                cats.forEach(function(c){
-                        catWrap.appendChild(makeChip(c, STATE.filters.category === c, function(){
-                                  STATE.filters.category = (STATE.filters.category === c) ? null : c;
-                                  refreshChipStates(); renderProducts();
-                        }));
-                });
+  function saveShoppingList(){
+    localStorage.setItem("hc_shopping", JSON.stringify(STATE.shoppingList));
+  }
 
-                var dietSet = new Set();
-                STATE.products.forEach(function(p){ (p.diet||[]).forEach(function(d){ dietSet.add(d); }); });
-                var dietWrap = document.getElementById("dietChips");
-                dietWrap.innerHTML = "";
-                Array.from(dietSet).sort().forEach(function(d){
-                        dietWrap.appendChild(makeChip(d, STATE.filters.diet.has(d), function(){
-                                  toggleSetFilter(STATE.filters.diet, d); refreshChipStates(); renderProducts();
-                        }));
-                });
+  // ---------- Load products (with offline fallback) ----------
+  function loadProducts(){
+    var statusLine = document.getElementById("statusLine");
+    var SHARD_COUNT = 8;
+    var shardUrls = [];
+    for (var i = 0; i < SHARD_COUNT; i++) shardUrls.push("data/products_" + i + ".json");
+    Promise.all(shardUrls.map(function(u){
+      return fetch(u, { cache: "no-store" }).then(function(r){ if(!r.ok) throw new Error("http"); return r.json(); });
+    }))
+      .then(function(shards){
+        var data = [].concat.apply([], shards);
+        STATE.products = data;
+        localStorage.setItem("hc_products_cache", JSON.stringify(data));
+        localStorage.setItem("hc_products_cache_date", new Date().toISOString());
+        statusLine.textContent = data.length + " Produkte geladen";
+        initFilters();
+        renderProducts();
+      })
+      .catch(function(){
+        var cached = localStorage.getItem("hc_products_cache");
+        if (cached) {
+          STATE.products = JSON.parse(cached);
+          var d = localStorage.getItem("hc_products_cache_date");
+          statusLine.textContent = "Offline – letzter Stand vom " + (d ? new Date(d).toLocaleDateString("de-CH") : "?");
+          initFilters();
+          renderProducts();
+        } else {
+          statusLine.textContent = "Keine Verbindung und kein Offline-Backup vorhanden.";
+        }
+      });
+  }
 
-                var welfareSet = new Set();
-                STATE.products.forEach(function(p){ (p.welfare_sustainability||[]).forEach(function(w){ welfareSet.add(w); }); });
-                var welfareWrap = document.getElementById("welfareChips");
-                welfareWrap.innerHTML = "";
-                Array.from(welfareSet).sort().forEach(function(w){
-                        welfareWrap.appendChild(makeChip(w, STATE.filters.welfare.has(w), function(){
-                                  toggleSetFilter(STATE.filters.welfare, w); refreshChipStates(); renderProducts();
-                        }));
-                });
-          }
+  // ---------- Filters ----------
+  function initFilters(){
+    var cats = Array.from(new Set(STATE.products.map(function(p){ return p.category; }))).sort();
+    var catWrap = document.getElementById("categoryChips");
+    catWrap.innerHTML = "";
+    var allChip = makeChip("Alle", STATE.filters.category === null, function(){
+      STATE.filters.category = null; refreshChipStates(); renderProducts();
+    });
+    catWrap.appendChild(allChip);
+    cats.forEach(function(c){
+      catWrap.appendChild(makeChip(c, STATE.filters.category === c, function(){
+        STATE.filters.category = (STATE.filters.category === c) ? null : c;
+        refreshChipStates(); renderProducts();
+      }));
+    });
 
-          function toggleSetFilter(set, val){
-                if (set.has(val)) set.delete(val); else set.add(val);
-          }
+    var dietSet = new Set();
+    STATE.products.forEach(function(p){ (p.diet||[]).forEach(function(d){ dietSet.add(d); }); });
+    var dietWrap = document.getElementById("dietChips");
+    dietWrap.innerHTML = "";
+    Array.from(dietSet).sort().forEach(function(d){
+      dietWrap.appendChild(makeChip(d, STATE.filters.diet.has(d), function(){
+        toggleSetFilter(STATE.filters.diet, d); refreshChipStates(); renderProducts();
+      }));
+    });
 
-          function makeChip(label, active, onClick){
-                var el = document.createElement("div");
-                el.className = "chip" + (active ? " active" : "");
-                el.textContent = label;
-                el.dataset.label = label;
-                el.addEventListener("click", onClick);
-                return el;
-          }
+    var welfareSet = new Set();
+    STATE.products.forEach(function(p){ (p.welfare_sustainability||[]).forEach(function(w){ welfareSet.add(w); }); });
+    var welfareWrap = document.getElementById("welfareChips");
+    welfareWrap.innerHTML = "";
+    Array.from(welfareSet).sort().forEach(function(w){
+      welfareWrap.appendChild(makeChip(w, STATE.filters.welfare.has(w), function(){
+        toggleSetFilter(STATE.filters.welfare, w); refreshChipStates(); renderProducts();
+      }));
+    });
+  }
 
-          function refreshChipStates(){
-                document.querySelectorAll("#categoryChips .chip").forEach(function(el){
-                        var isAll = el.dataset.label === "Alle";
-                        el.classList.toggle("active", isAll ? STATE.filters.category === null : STATE.filters.category === el.dataset.label);
-                });
-                document.querySelectorAll("#dietChips .chip").forEach(function(el){
-                        el.classList.toggle("active", STATE.filters.diet.has(el.dataset.label));
-                });
-                document.querySelectorAll("#welfareChips .chip").forEach(function(el){
-                        el.classList.toggle("active", STATE.filters.welfare.has(el.dataset.label));
-                });
-          }
+  function toggleSetFilter(set, val){
+    if (set.has(val)) set.delete(val); else set.add(val);
+  }
 
-          function matchesFilters(p){
-                var f = STATE.filters;
-                if (f.search && p.name.toLowerCase().indexOf(f.search.toLowerCase()) === -1) return false;
-                if (f.category && p.category !== f.category) return false;
-                if (f.diet.size > 0) {
-                        var pd = new Set(p.diet || []);
-                        for (var d of f.diet) if (!pd.has(d)) return false;
-                }
-                if (f.welfare.size > 0) {
-                        var pw = new Set(p.welfare_sustainability || []);
-                        for (var w of f.welfare) if (!pw.has(w)) return false;
-                }
-                return true;
-          }
+  function makeChip(label, active, onClick){
+    var el = document.createElement("div");
+    el.className = "chip" + (active ? " active" : "");
+    el.textContent = label;
+    el.dataset.label = label;
+    el.addEventListener("click", onClick);
+    return el;
+  }
 
-          function getFilteredProducts(){
-                return STATE.products.filter(matchesFilters);
-          }
+  function refreshChipStates(){
+    document.querySelectorAll("#categoryChips .chip").forEach(function(el){
+      var isAll = el.dataset.label === "Alle";
+      el.classList.toggle("active", isAll ? STATE.filters.category === null : STATE.filters.category === el.dataset.label);
+    });
+    document.querySelectorAll("#dietChips .chip").forEach(function(el){
+      el.classList.toggle("active", STATE.filters.diet.has(el.dataset.label));
+    });
+    document.querySelectorAll("#welfareChips .chip").forEach(function(el){
+      el.classList.toggle("active", STATE.filters.welfare.has(el.dataset.label));
+    });
+  }
 
-          // ---------- Render product grid ----------
-          function renderProducts(){
-                var grid = document.getElementById("productGrid");
-                var list = getFilteredProducts();
-                grid.innerHTML = "";
-                if (list.length === 0) {
-                        grid.innerHTML = '<div class="empty">Keine Produkte gefunden.</div>';
-                        return;
-                }
-                list.forEach(function(p){
-                        grid.appendChild(productCard(p));
-                });
-          }
+  function matchesFilters(p){
+    var f = STATE.filters;
+    if (f.search && p.name.toLowerCase().indexOf(f.search.toLowerCase()) === -1) return false;
+    if (f.category && p.category !== f.category) return false;
+    if (f.diet.size > 0) {
+      var pd = new Set(p.diet || []);
+      for (var d of f.diet) if (!pd.has(d)) return false;
+    }
+    if (f.welfare.size > 0) {
+      var pw = new Set(p.welfare_sustainability || []);
+      for (var w of f.welfare) if (!pw.has(w)) return false;
+    }
+    return true;
+  }
 
-          function productCard(p){
-                var card = document.createElement("div");
-                card.className = "card";
-                var n = p.nutrition_per_100g || {};
-                var tagsHtml = (p.diet||[]).concat(p.welfare_sustainability||[]).slice(0,3)
-                  .map(function(t){ return '<span class="tag' + (t==="Bio Suisse"?" bio":"") + '">' + t + '</span>'; }).join("");
-                card.innerHTML =
-                        '<img src="' + p.image + '" loading="lazy" onerror="this.style.opacity=0.2">' +
-                        '<div class="name">' + escapeHtml(p.name) + '</div>' +
-                        '<div class="price">' + (p.price_chf != null ? "CHF " + p.price_chf.toFixed(2) : "Preis unbekannt") + '</div>' +
-                        '<div class="tags">' + tagsHtml + '</div>' +
-                        (n.energy_kj != null ? '<div class="nutri">' + n.energy_kj + ' kJ · ' + (n.protein_g!=null?n.protein_g+'g Eiw.':'') + '</div>' : '') +
-                        '<button type="button">+ Liste</button>';
-                card.querySelector("button").addEventListener("click", function(){
-                        addToShoppingList(p);
-                });
-                return card;
-          }
+  function getFilteredProducts(){
+    return STATE.products.filter(matchesFilters);
+  }
 
-          function escapeHtml(s){
-                return (s||"").replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]; });
-          }
+  // ---------- Render product grid ----------
+  function renderProducts(){
+    var grid = document.getElementById("productGrid");
+    var list = getFilteredProducts();
+    grid.innerHTML = "";
+    if (list.length === 0) {
+      grid.innerHTML = '<div class="empty">Keine Produkte gefunden.</div>';
+      return;
+    }
+    list.forEach(function(p){
+      grid.appendChild(productCard(p));
+    });
+  }
 
-          // ---------- Shopping list ----------
-          function addToShoppingList(p){
-                if (STATE.shoppingList.some(function(i){ return i.id === p.id; })) {
-                        toast(p.name + " ist bereits auf der Liste");
-                        return;
-                }
-                STATE.shoppingList.push({ id: p.id, name: p.name, image: p.image, price_chf: p.price_chf, checked: false });
-                saveShoppingList();
-                renderShoppingList();
-                toast(p.name + " zur Liste hinzugefügt");
-          }
+  function productCard(p){
+    var card = document.createElement("div");
+    card.className = "card";
+    var n = p.nutrition_per_100g || {};
+    var tagsHtml = (p.diet||[]).concat(p.welfare_sustainability||[]).slice(0,3)
+      .map(function(t){ return '<span class="tag' + (t==="Bio Suisse"?" bio":"") + '">' + t + '</span>'; }).join("");
+    card.innerHTML =
+      '<img src="' + p.image + '" loading="lazy" onerror="this.style.opacity=0.2">' +
+      '<div class="name">' + escapeHtml(p.name) + '</div>' +
+      '<div class="price">' + (p.price_chf != null ? "CHF " + p.price_chf.toFixed(2) : "Preis unbekannt") + '</div>' +
+      '<div class="tags">' + tagsHtml + '</div>' +
+      (n.energy_kj != null ? '<div class="nutri">' + n.energy_kj + ' kJ · ' + (n.protein_g!=null?n.protein_g+'g Eiw.':'') + '</div>' : '') +
+      '<button type="button">+ Liste</button>';
+    card.querySelector("button").addEventListener("click", function(){
+      addToShoppingList(p);
+    });
+    return card;
+  }
 
-          function renderShoppingList(){
-                var wrap = document.getElementById("shoppingListItems");
-                var empty = document.getElementById("shoppingListEmpty");
-                var clearBtn = document.getElementById("clearCheckedBtn");
-                wrap.innerHTML = "";
-                if (STATE.shoppingList.length === 0) {
-                        empty.style.display = "block";
-                        clearBtn.style.display = "none";
-                        return;
-                }
-                empty.style.display = "none";
-                var anyChecked = false;
-                STATE.shoppingList.forEach(function(item, idx){
-                        if (item.checked) anyChecked = true;
-                        var row = document.createElement("div");
-                        row.className = "shopping-item" + (item.checked ? " checked" : "");
-                        row.innerHTML =
-                                  '<input type="checkbox" ' + (item.checked ? "checked" : "") + '>' +
-                                  '<img src="' + item.image + '" style="width:40px;height:40px;object-fit:contain;border-radius:6px;">' +
-                                  '<div class="name' + (item.checked ? " checked" : "") + '">' + escapeHtml(item.name) +
-                                    (item.price_chf != null ? ' <span style="color:#999;font-size:0.75em;">CHF ' + item.price_chf.toFixed(2) + '</span>' : '') +
-                                  '</div>' +
-                                  '<button class="remove" title="Entfernen">✕</button>';
-                        row.querySelector("input").addEventListener("change", function(e){
-                                  STATE.shoppingList[idx].checked = e.target.checked;
-                                  saveShoppingList();
-                                  renderShoppingList();
-                        });
-                        row.querySelector("button.remove").addEventListener("click", function(){
-                                  STATE.shoppingList.splice(idx, 1);
-                                  saveShoppingList();
-                                  renderShoppingList();
-                        });
-                        wrap.appendChild(row);
-                });
-                clearBtn.style.display = anyChecked ? "block" : "none";
-          }
+  function escapeHtml(s){
+    return (s||"").replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]; });
+  }
 
-          document.getElementById("clearCheckedBtn").addEventListener("click", function(){
-                STATE.shoppingList = STATE.shoppingList.filter(function(i){ return !i.checked; });
-                saveShoppingList();
-                renderShoppingList();
-          });
+  // ---------- Shopping list ----------
+  function addToShoppingList(p){
+    if (STATE.shoppingList.some(function(i){ return i.id === p.id; })) {
+      toast(p.name + " ist bereits auf der Liste");
+      return;
+    }
+    STATE.shoppingList.push({ id: p.id, name: p.name, image: p.image, price_chf: p.price_chf, checked: false });
+    saveShoppingList();
+    renderShoppingList();
+    toast(p.name + " zur Liste hinzugefügt");
+  }
 
-          // ---------- Tabs ----------
-          document.querySelectorAll("nav.tabs button").forEach(function(btn){
-                btn.addEventListener("click", function(){
-                        document.querySelectorAll("nav.tabs button").forEach(function(b){ b.classList.remove("active"); });
-                        btn.classList.add("active");
-                        document.querySelectorAll(".view").forEach(function(v){ v.classList.remove("active"); });
-                        document.getElementById("view-" + btn.dataset.view).classList.add("active");
-                });
-          });
+  function renderShoppingList(){
+    var wrap = document.getElementById("shoppingListItems");
+    var empty = document.getElementById("shoppingListEmpty");
+    var clearBtn = document.getElementById("clearCheckedBtn");
+    wrap.innerHTML = "";
+    if (STATE.shoppingList.length === 0) {
+      empty.style.display = "block";
+      clearBtn.style.display = "none";
+      return;
+    }
+    empty.style.display = "none";
+    var anyChecked = false;
+    STATE.shoppingList.forEach(function(item, idx){
+      if (item.checked) anyChecked = true;
+      var row = document.createElement("div");
+      row.className = "shopping-item" + (item.checked ? " checked" : "");
+      row.innerHTML =
+        '<input type="checkbox" ' + (item.checked ? "checked" : "") + '>' +
+        '<img src="' + item.image + '" style="width:40px;height:40px;object-fit:contain;border-radius:6px;">' +
+        '<div class="name' + (item.checked ? " checked" : "") + '">' + escapeHtml(item.name) +
+          (item.price_chf != null ? ' <span style="color:#999;font-size:0.75em;">CHF ' + item.price_chf.toFixed(2) + '</span>' : '') +
+        '</div>' +
+        '<button class="remove" title="Entfernen">✕</button>';
+      row.querySelector("input").addEventListener("change", function(e){
+        STATE.shoppingList[idx].checked = e.target.checked;
+        saveShoppingList();
+        renderShoppingList();
+      });
+      row.querySelector("button.remove").addEventListener("click", function(){
+        STATE.shoppingList.splice(idx, 1);
+        saveShoppingList();
+        renderShoppingList();
+      });
+      wrap.appendChild(row);
+    });
+    clearBtn.style.display = anyChecked ? "block" : "none";
+  }
 
-          document.querySelectorAll(".tabbar-import button").forEach(function(btn){
-                btn.addEventListener("click", function(){
-                        document.querySelectorAll(".tabbar-import button").forEach(function(b){ b.classList.remove("active"); });
-                        btn.classList.add("active");
-                        document.querySelectorAll(".import-panel").forEach(function(p){ p.classList.remove("active"); });
-                        document.getElementById("import-" + btn.dataset.import).classList.add("active");
-                });
-          });
+  document.getElementById("clearCheckedBtn").addEventListener("click", function(){
+    STATE.shoppingList = STATE.shoppingList.filter(function(i){ return !i.checked; });
+    saveShoppingList();
+    renderShoppingList();
+  });
 
-          document.getElementById("searchInput").addEventListener("input", function(e){
-                STATE.filters.search = e.target.value;
-                renderProducts();
-          });
+  // ---------- Tabs ----------
+  document.querySelectorAll("nav.tabs button").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      document.querySelectorAll("nav.tabs button").forEach(function(b){ b.classList.remove("active"); });
+      btn.classList.add("active");
+      document.querySelectorAll(".view").forEach(function(v){ v.classList.remove("active"); });
+      document.getElementById("view-" + btn.dataset.view).classList.add("active");
+    });
+  });
 
-          // ---------- Recipe ingredient parsing ----------
-          var STOPWORDS = new Set(["g","kg","ml","l","el","tl","stk","stück","prise","etwas","ca","bio","frisch","frische","frischer","und","oder","in","für","gehackt","gewürfelt","gerieben","fein","grob","nach","geschmack","optional","ungefähr","dose","bund","zweig","zweige"]);
+  document.querySelectorAll(".tabbar-import button").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      document.querySelectorAll(".tabbar-import button").forEach(function(b){ b.classList.remove("active"); });
+      btn.classList.add("active");
+      document.querySelectorAll(".import-panel").forEach(function(p){ p.classList.remove("active"); });
+      document.getElementById("import-" + btn.dataset.import).classList.add("active");
+    });
+  });
 
-          function tokenize(s){
-                return (s||"").toLowerCase()
-                  .replace(/[.,;:()\/\-]/g, " ")
-                  .split(/\s+/)
-                  .filter(function(w){ return w.length > 1 && !/^\d+$/.test(w) && !STOPWORDS.has(w); });
-          }
+  document.getElementById("searchInput").addEventListener("input", function(e){
+    STATE.filters.search = e.target.value;
+    renderProducts();
+  });
 
-          function parseIngredientLines(text){
-                return text.split("\n")
-                  .map(function(l){ return l.trim(); })
-                  .filter(function(l){ return l.length > 1 && l.length < 120; })
-                  .map(function(l){ return l.replace(/^[-*•\d.)\s]+/, "").trim(); })
-                  .filter(function(l){ return l.length > 1; });
-          }
+  // ---------- Recipe ingredient parsing ----------
+  var STOPWORDS = new Set(["g","kg","ml","l","el","tl","stk","stück","prise","etwas","ca","bio","frisch","frische","frischer","und","oder","in","für","gehackt","gewürfelt","gerieben","fein","grob","nach","geschmack","optional","ungefähr","dose","bund","zweig","zweige"]);
 
-          function matchIngredientToProducts(line){
-                var tokens = tokenize(line);
-                if (tokens.length === 0) return [];
-                var scored = STATE.products.map(function(p){
-                        var nameTokens = tokenize(p.name);
-                        var score = 0;
-                        tokens.forEach(function(t){
-                                  nameTokens.forEach(function(nt){
-                                              if (nt === t) score += 2;
-                                              else if (nt.indexOf(t) !== -1 || t.indexOf(nt) !== -1) score += 1;
-                                  });
-                        });
-                        return { product: p, score: score };
-                }).filter(function(s){ return s.score > 0; });
-                scored.sort(function(a,b){ return b.score - a.score; });
-                return scored.slice(0, 5).map(function(s){ return s.product; });
-          }
+  function tokenize(s){
+    return (s||"").toLowerCase()
+      .replace(/[.,;:()\/\-]/g, " ")
+      .split(/\s+/)
+      .filter(function(w){ return w.length > 1 && !/^\d+$/.test(w) && !STOPWORDS.has(w); });
+  }
 
-          function renderMatchResults(lines){
-                var wrap = document.getElementById("matchResults");
-                wrap.innerHTML = "";
-                if (lines.length === 0) {
-                        wrap.innerHTML = '<div class="empty">Keine Zutaten erkannt.</div>';
-                        return;
-                }
-                lines.forEach(function(line){
-                        var candidates = matchIngredientToProducts(line).filter(matchesFilters);
-                        if (candidates.length === 0) candidates = matchIngredientToProducts(line);
-                        var row = document.createElement("div");
-                        row.className = "match-row";
-                        var candHtml = candidates.map(function(p){
-                                  return '<div class="cand" data-id="' + p.id + '"><img src="' + p.image + '" onerror="this.style.opacity=0.2"><div class="n">' + escapeHtml(p.name) + '</div></div>';
-                        }).join("");
-                        row.innerHTML =
-                                  '<div class="ingredient-line">' + escapeHtml(line) + '</div>' +
-                                  '<div class="match-candidates">' + (candHtml || '<span class="note">Kein passendes Produkt gefunden</span>') + '</div>';
-                        row.querySelectorAll(".cand").forEach(function(el){
-                                  el.addEventListener("click", function(){
-                                              var id = el.dataset.id;
-                                              var product = STATE.products.find(function(p){ return p.id === id; });
-                                              if (product) addToShoppingList(product);
-                                              el.classList.add("picked");
-                                  });
-                        });
-                        wrap.appendChild(row);
-                });
-          }
+  function parseIngredientLines(text){
+    return text.split("\n")
+      .map(function(l){ return l.trim(); })
+      .filter(function(l){ return l.length > 1 && l.length < 120; })
+      .map(function(l){ return l.replace(/^[-*•\d.)\s]+/, "").trim(); })
+      .filter(function(l){ return l.length > 1; });
+  }
 
-          document.getElementById("parseTextBtn").addEventListener("click", function(){
-                var text = document.getElementById("recipeText").value;
-                var lines = parseIngredientLines(text);
-                document.getElementById("recipeStatus").textContent = lines.length + " Zeilen erkannt.";
-                renderMatchResults(lines);
-          });
+  function matchIngredientToProducts(line){
+    var tokens = tokenize(line);
+    if (tokens.length === 0) return [];
+    var scored = STATE.products.map(function(p){
+      var nameTokens = tokenize(p.name);
+      var score = 0;
+      tokens.forEach(function(t){
+        nameTokens.forEach(function(nt){
+          if (nt === t) score += 2;
+          else if (nt.indexOf(t) !== -1 || t.indexOf(nt) !== -1) score += 1;
+        });
+      });
+      return { product: p, score: score };
+    }).filter(function(s){ return s.score > 0; });
+    scored.sort(function(a,b){ return b.score - a.score; });
+    return scored.slice(0, 5).map(function(s){ return s.product; });
+  }
 
-          document.getElementById("parseUrlBtn").addEventListener("click", function(){
-                var url = document.getElementById("recipeUrl").value.trim();
-                if (!url) return;
-                var statusEl = document.getElementById("recipeStatus");
-                statusEl.innerHTML = '<span class="spinner"></span> Lade Rezept…';
-                var proxied = "https://corsproxy.io/?" + encodeURIComponent(url);
-                fetch(proxied)
-                  .then(function(r){ if(!r.ok) throw new Error("http"); return r.text(); })
-                  .then(function(html){
-                            var doc = new DOMParser().parseFromString(html, "text/html");
-                            var text = doc.body ? doc.body.innerText : "";
-                            var lines = parseIngredientLines(text).slice(0, 60);
-                            statusEl.textContent = "Seite geladen – bitte relevante Zutatenzeilen prüfen (" + lines.length + " Zeilen gefunden).";
-                            renderMatchResults(lines);
-                  })
-                  .catch(function(){
-                            statusEl.textContent = "Konnte diese Seite nicht laden. Bitte Zutaten stattdessen als Text einfügen.";
-                  });
-          });
+  function renderMatchResults(lines){
+    var wrap = document.getElementById("matchResults");
+    wrap.innerHTML = "";
+    if (lines.length === 0) {
+      wrap.innerHTML = '<div class="empty">Keine Zutaten erkannt.</div>';
+      return;
+    }
+    lines.forEach(function(line){
+      var candidates = matchIngredientToProducts(line).filter(matchesFilters);
+      if (candidates.length === 0) candidates = matchIngredientToProducts(line);
+      var row = document.createElement("div");
+      row.className = "match-row";
+      var candHtml = candidates.map(function(p){
+        return '<div class="cand" data-id="' + p.id + '"><img src="' + p.image + '" onerror="this.style.opacity=0.2"><div class="n">' + escapeHtml(p.name) + '</div></div>';
+      }).join("");
+      row.innerHTML =
+        '<div class="ingredient-line">' + escapeHtml(line) + '</div>' +
+        '<div class="match-candidates">' + (candHtml || '<span class="note">Kein passendes Produkt gefunden</span>') + '</div>';
+      row.querySelectorAll(".cand").forEach(function(el){
+        el.addEventListener("click", function(){
+          var id = el.dataset.id;
+          var product = STATE.products.find(function(p){ return p.id === id; });
+          if (product) addToShoppingList(product);
+          el.classList.add("picked");
+        });
+      });
+      wrap.appendChild(row);
+    });
+  }
 
-          document.getElementById("photoInput").addEventListener("change", function(e){
-                var file = e.target.files[0];
-                if (!file) return;
-                var img = document.getElementById("photoPreview");
-                img.src = URL.createObjectURL(file);
-                img.style.display = "block";
-          });
+  document.getElementById("parseTextBtn").addEventListener("click", function(){
+    var text = document.getElementById("recipeText").value;
+    var lines = parseIngredientLines(text);
+    document.getElementById("recipeStatus").textContent = lines.length + " Zeilen erkannt.";
+    renderMatchResults(lines);
+  });
 
-          document.getElementById("parsePhotoBtn").addEventListener("click", function(){
-                var file = document.getElementById("photoInput").files[0];
-                if (!file) { toast("Bitte zuerst ein Foto auswählen"); return; }
-                var statusEl = document.getElementById("recipeStatus");
-                statusEl.innerHTML = '<span class="spinner"></span> Texterkennung läuft…';
-                if (typeof Tesseract === "undefined") {
-                        statusEl.textContent = "Texterkennung konnte nicht geladen werden (keine Internetverbindung?).";
-                        return;
-                }
-                Tesseract.recognize(file, "deu")
-                  .then(function(result){
-                            var text = result.data.text || "";
-                            var lines = parseIngredientLines(text);
-                            statusEl.textContent = lines.length + " Zeilen aus dem Foto erkannt.";
-                            renderMatchResults(lines);
-                  })
-                  .catch(function(){
-                            statusEl.textContent = "Texterkennung fehlgeschlagen. Bitte ein schärferes Foto versuchen oder Text einfügen.";
-                  });
-          });
+  document.getElementById("parseUrlBtn").addEventListener("click", function(){
+    var url = document.getElementById("recipeUrl").value.trim();
+    if (!url) return;
+    var statusEl = document.getElementById("recipeStatus");
+    statusEl.innerHTML = '<span class="spinner"></span> Lade Rezept…';
+    var proxied = "https://corsproxy.io/?" + encodeURIComponent(url);
+    fetch(proxied)
+      .then(function(r){ if(!r.ok) throw new Error("http"); return r.text(); })
+      .then(function(html){
+        var doc = new DOMParser().parseFromString(html, "text/html");
+        var text = doc.body ? doc.body.innerText : "";
+        var lines = parseIngredientLines(text).slice(0, 60);
+        statusEl.textContent = "Seite geladen – bitte relevante Zutatenzeilen prüfen (" + lines.length + " Zeilen gefunden).";
+        renderMatchResults(lines);
+      })
+      .catch(function(){
+        statusEl.textContent = "Konnte diese Seite nicht laden. Bitte Zutaten stattdessen als Text einfügen.";
+      });
+  });
 
-          // ---------- Service worker ----------
-          if ("serviceWorker" in navigator) {
-                window.addEventListener("load", function(){
-                        navigator.serviceWorker.register("sw.js").catch(function(){});
-                });
-          }
+  document.getElementById("photoInput").addEventListener("change", function(e){
+    var file = e.target.files[0];
+    if (!file) return;
+    var img = document.getElementById("photoPreview");
+    img.src = URL.createObjectURL(file);
+    img.style.display = "block";
+  });
 
-          // ---------- Init ----------
-          loadProducts();
-          renderShoppingList();
-      })();
-    </script>
-  </body>
-</html>
+  document.getElementById("parsePhotoBtn").addEventListener("click", function(){
+    var file = document.getElementById("photoInput").files[0];
+    if (!file) { toast("Bitte zuerst ein Foto auswählen"); return; }
+    var statusEl = document.getElementById("recipeStatus");
+    statusEl.innerHTML = '<span class="spinner"></span> Texterkennung läuft…';
+    if (typeof Tesseract === "undefined") {
+      statusEl.textContent = "Texterkennung konnte nicht geladen werden (keine Internetverbindung?).";
+      return;
+    }
+    Tesseract.recognize(file, "deu")
+      .then(function(result){
+        var text = result.data.text || "";
+        var lines = parseIngredientLines(text);
+        statusEl.textContent = lines.length + " Zeilen aus dem Foto erkannt.";
+        renderMatchResults(lines);
+      })
+      .catch(function(){
+        statusEl.textContent = "Texterkennung fehlgeschlagen. Bitte ein schärferes Foto versuchen oder Text einfügen.";
+      });
+  });
+
+  // ---------- Service worker ----------
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function(){
+      navigator.serviceWorker.register("sw.js").catch(function(){});
+    });
+  }
+
+  // ---------- Init ----------
+  loadProducts();
+  renderShoppingList();
+})();
+</script>
+</body>
 </html>
