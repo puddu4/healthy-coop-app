@@ -1,1 +1,114 @@
-[{"id": "7332577", "name": "Loué Poulet ganz 1.25kg", "price_chf": 19.5, "image": "https://www.coop.ch/img/produkte/155_155/RGB/7332577_001.jpg", "url": "https://www.coop.ch/de/p/7332577", "category": "Fleisch & Fisch", "diet": ["Gekühlt"], "welfare_sustainability": ["Label Rouge"], "nutrition_per_100g": {"energy_kj": null, "fat_g": null, "saturated_fat_g": null, "carbs_g": null, "sugar_g": null, "fiber_g": null, "protein_g": null, "salt_g": null}, "ingredients": "Pouletfleisch (Frankreich).", "eco_score": null, "eco_detail_url": null}, {"id": "4418387", "name": "Loué Pouletbrust 2 Stück ca. 280g", "price_chf": 12.3, "image": "https://www.coop.ch/img/produkte/155_155/RGB/4418387_001.jpg", "url": "https://www.coop.ch/de/p/4418387", "category": "Fleisch & Fisch", "diet": ["Gekühlt"], "welfare_sustainability": ["Label Rouge"], "nutrition_per_100g": {"energy_kj": null, "fat_g": null, "saturated_fat_g": null, "carbs_g": null, "sugar_g": null, "fiber_g": null, "protein_g": null, "salt_g": null}, "ingredients": "Pouletfleisch.", "eco_score": null, "eco_detail_url": null}, {"id": "4418407", "name": "Loué Putenmedaillons 240g", "price_chf": 11.5, "image": "https://www.coop.ch/img/produkte/155_155/RGB/4418407_001.jpg", "url": "https://www.coop.ch/de/p/4418407", "category": "Fleisch & Fisch", "diet": ["Gekühlt"], "welfare_sustainability": ["Label Rouge"], "nutrition_per_100g": {"energy_kj": null, "fat_g": null, "saturated_fat_g": null, "carbs_g": null, "sugar_g": null, "fiber_g": null, "protein_g": null, "salt_g": null}, "ingredients": "Trutenfleisch.", "eco_score": null, "eco_detail_url": null}, {"id": "7332580", "name": "Loué Pouletschenkel", "price_chf": 9.95, "image": "https://www.coop.ch/img/produkte/155_155/RGB/7332580_001.jpg", "url": "https://www.coop.ch/de/p/7332580", "category": "Fleisch & Fisch", "diet": ["Gekühlt"], "welfare_sustainability": ["Label Rouge"], "nutrition_per_100g": {"energy_kj": null, "fat_g": null, "saturated_fat_g": null, "carbs_g": null, "sugar_g": null, "fiber_g": null, "protein_g": null, "salt_g": null}, "ingredients": "Pouletfleisch (Frankreich).", "eco_score": null, "eco_detail_url": null}]
+[
+ {
+  "id": "7332577",
+  "name": "Loué Poulet ganz 1.25kg",
+  "price_chf": 19.5,
+  "image": "https://www.coop.ch/img/produkte/155_155/RGB/7332577_001.jpg",
+  "url": "https://www.coop.ch/de/p/7332577",
+  "category": "Fleisch & Fisch",
+  "diet": [
+   "Gekühlt"
+  ],
+  "welfare_sustainability": [
+   "Label Rouge"
+  ],
+  "nutrition_per_100g": {
+   "energy_kj": null,
+   "fat_g": null,
+   "saturated_fat_g": null,
+   "carbs_g": null,
+   "sugar_g": null,
+   "fiber_g": null,
+   "protein_g": null,
+   "salt_g": null
+  },
+  "ingredients": "Pouletfleisch (Frankreich).",
+  "eco_score": null,
+  "eco_detail_url": null,
+  "subcategory": "Poulet"
+ },
+ {
+  "id": "4418387",
+  "name": "Loué Pouletbrust 2 Stück ca. 280g",
+  "price_chf": 12.3,
+  "image": "https://www.coop.ch/img/produkte/155_155/RGB/4418387_001.jpg",
+  "url": "https://www.coop.ch/de/p/4418387",
+  "category": "Fleisch & Fisch",
+  "diet": [
+   "Gekühlt"
+  ],
+  "welfare_sustainability": [
+   "Label Rouge"
+  ],
+  "nutrition_per_100g": {
+   "energy_kj": null,
+   "fat_g": null,
+   "saturated_fat_g": null,
+   "carbs_g": null,
+   "sugar_g": null,
+   "fiber_g": null,
+   "protein_g": null,
+   "salt_g": null
+  },
+  "ingredients": "Pouletfleisch.",
+  "eco_score": null,
+  "eco_detail_url": null,
+  "subcategory": "Poulet"
+ },
+ {
+  "id": "4418407",
+  "name": "Loué Putenmedaillons 240g",
+  "price_chf": 11.5,
+  "image": "https://www.coop.ch/img/produkte/155_155/RGB/4418407_001.jpg",
+  "url": "https://www.coop.ch/de/p/4418407",
+  "category": "Fleisch & Fisch",
+  "diet": [
+   "Gekühlt"
+  ],
+  "welfare_sustainability": [
+   "Label Rouge"
+  ],
+  "nutrition_per_100g": {
+   "energy_kj": null,
+   "fat_g": null,
+   "saturated_fat_g": null,
+   "carbs_g": null,
+   "sugar_g": null,
+   "fiber_g": null,
+   "protein_g": null,
+   "salt_g": null
+  },
+  "ingredients": "Trutenfleisch.",
+  "eco_score": null,
+  "eco_detail_url": null,
+  "subcategory": "Pute"
+ },
+ {
+  "id": "7332580",
+  "name": "Loué Pouletschenkel",
+  "price_chf": 9.95,
+  "image": "https://www.coop.ch/img/produkte/155_155/RGB/7332580_001.jpg",
+  "url": "https://www.coop.ch/de/p/7332580",
+  "category": "Fleisch & Fisch",
+  "diet": [
+   "Gekühlt"
+  ],
+  "welfare_sustainability": [
+   "Label Rouge"
+  ],
+  "nutrition_per_100g": {
+   "energy_kj": null,
+   "fat_g": null,
+   "saturated_fat_g": null,
+   "carbs_g": null,
+   "sugar_g": null,
+   "fiber_g": null,
+   "protein_g": null,
+   "salt_g": null
+  },
+  "ingredients": "Pouletfleisch (Frankreich).",
+  "eco_score": null,
+  "eco_detail_url": null,
+  "subcategory": "Poulet"
+ }
+]
