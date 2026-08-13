@@ -420,9 +420,20 @@
   function matchesFilters(p){
     var f = STATE.filters;
     if (f.search) {
-      var q = f.search.toLowerCase();
-      var haystack = ((p.name||"") + " " + (p.category||"") + " " + (p.ingredients||"")).toLowerCase();
-      if (haystack.indexOf(q) === -1) return false;
+      var haystackRaw = ((p.name||"") + " " + (p.category||"") + " " + (p.ingredients||"")).toLowerCase();
+      var queryTokens = tokenize(f.search);
+      if (queryTokens.length > 0) {
+        // Tolerant wie bei der Rezept-Zutatensuche: Schreibvarianten/Tippfehler (Fuzzy-Matching)
+        // und bekannte Synonyme (z.B. Rüebli/Karotten) werden ebenfalls als Treffer gezählt.
+        var haystackTokens = tokenize(haystackRaw);
+        var allMatch = queryTokens.every(function(qt){
+          return haystackTokens.some(function(ht){ return tokensMatch(qt, ht); });
+        });
+        if (!allMatch) return false;
+      } else if (haystackRaw.indexOf(f.search.toLowerCase().trim()) === -1) {
+        // Sehr kurze Suchbegriffe (1 Zeichen o.ä.) werden von tokenize() gefiltert -> einfacher Substring-Fallback.
+        return false;
+      }
     }
     if (f.category && p.category !== f.category) return false;
     if (f.diet.size > 0) {
