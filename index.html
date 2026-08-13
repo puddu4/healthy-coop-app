@@ -189,7 +189,8 @@
   <!-- PRODUCTS VIEW -->
   <section class="view active" id="view-products">
     <div class="filter-bar">
-      <input type="search" id="searchInput" placeholder="Produkt suchen…">
+      <input type="search" id="searchInput" placeholder="Produkt oder Kategorie suchen (z.B. Milch)…">
+      <div class="note" style="margin-top:-4px;">Treffer werden nach gesund &amp; fair sortiert – die beste Wahl zuerst.</div>
 
       <div class="chip-label">Kategorie</div>
       <div class="chip-group" id="categoryChips"></div>
@@ -370,9 +371,36 @@
     });
   }
 
+  // ---------- Gesund- & Fair-Score ----------
+  // "Gesund" = mehr Eiweiss/Ballaststoffe, weniger Zucker/Salz/gesättigte Fette pro 100g.
+  function healthScore(p){
+    var n = p.nutrition_per_100g || {};
+    var protein = n.protein_g || 0;
+    var fiber = n.fiber_g || 0;
+    var sugar = n.sugar_g || 0;
+    var salt = n.salt_g || 0;
+    var satfat = n.saturated_fat_g || 0;
+    return (protein * 1) + (fiber * 2) - (sugar * 1) - (salt * 3) - (satfat * 1);
+  }
+
+  // "Fair" = Fairtrade- und Tierwohl-Labels über das Bio-Suisse-Grundlabel hinaus.
+  var FAIR_LABELS = new Set(["Fairtrade", "Naturafarm/Natura-Beef", "IP-Suisse", "Demeter", "MSC"]);
+  function fairScore(p){
+    var labels = p.welfare_sustainability || [];
+    return labels.filter(function(w){ return FAIR_LABELS.has(w); }).length;
+  }
+
+  function combinedScore(p){
+    return healthScore(p) + fairScore(p) * 5;
+  }
+
   function matchesFilters(p){
     var f = STATE.filters;
-    if (f.search && p.name.toLowerCase().indexOf(f.search.toLowerCase()) === -1) return false;
+    if (f.search) {
+      var q = f.search.toLowerCase();
+      var haystack = ((p.name||"") + " " + (p.category||"") + " " + (p.ingredients||"")).toLowerCase();
+      if (haystack.indexOf(q) === -1) return false;
+    }
     if (f.category && p.category !== f.category) return false;
     if (f.diet.size > 0) {
       var pd = new Set(p.diet || []);
@@ -386,7 +414,13 @@
   }
 
   function getFilteredProducts(){
-    return STATE.products.filter(matchesFilters);
+    var list = STATE.products.filter(matchesFilters);
+    list.sort(function(a, b){
+      var diff = combinedScore(b) - combinedScore(a);
+      if (diff !== 0) return diff;
+      return a.name.localeCompare(b.name);
+    });
+    return list;
   }
 
   // ---------- Render product grid ----------
@@ -538,7 +572,10 @@
       });
       return { product: p, score: score };
     }).filter(function(s){ return s.score > 0; });
-    scored.sort(function(a,b){ return b.score - a.score; });
+    scored.sort(function(a,b){
+      if (b.score !== a.score) return b.score - a.score;
+      return combinedScore(b.product) - combinedScore(a.product);
+    });
     return scored.slice(0, 5).map(function(s){ return s.product; });
   }
 
