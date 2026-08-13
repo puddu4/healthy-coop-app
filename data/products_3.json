@@ -1,1 +1,353 @@
-[{"id": "3443239", "name": "Naturaplan Bio Demeter Basilikum im Topf", "price_chf": 3.7, "image": "https://www.coop.ch/img/produkte/155_155/RGB/3443239_001.jpg", "url": "https://www.coop.ch/de/p/3443239", "category": "Sonstiges", "diet": [], "welfare_sustainability": ["Demeter", "Bio Suisse"], "nutrition_per_100g": {"energy_kj": null, "fat_g": null, "saturated_fat_g": null, "carbs_g": null, "sugar_g": null, "fiber_g": null, "protein_g": null, "salt_g": null}, "ingredients": "Bio Basilikum (Demeter / Knospe [Herkunft: siehe Datierungsfeld]).", "eco_score": "D_minus", "eco_detail_url": "https://contentimages.coop.ch/dambilder?id=1dc9eb03c2b7a88a7a8b1c67840d0b13b20ce39d"}, {"id": "6295171", "name": "Naturaplan Bio Demeter Zucchetti gelb ca. 500g", "price_chf": 5.5, "image": "https://www.coop.ch/img/produkte/155_155/RGB/6295171_001.jpg", "url": "https://www.coop.ch/de/p/6295171", "category": "Gemüse", "diet": [], "welfare_sustainability": ["Demeter", "Bio Suisse"], "nutrition_per_100g": {"energy_kj": null, "fat_g": null, "saturated_fat_g": null, "carbs_g": null, "sugar_g": null, "fiber_g": null, "protein_g": null, "salt_g": null}, "ingredients": null, "eco_score": null, "eco_detail_url": null}, {"id": "6292849", "name": "Naturaplan Bio Eier Freilandhaltung Schweiz Demeter 6 Stück 53g+", "price_chf": 6.95, "image": "https://www.coop.ch/img/produkte/155_155/RGB/6292849_001.jpg", "url": "https://www.coop.ch/de/p/6292849", "category": "Eier", "diet": [], "welfare_sustainability": ["Demeter", "Bio Suisse"], "nutrition_per_100g": {"energy_kj": 628, "fat_g": 11, "saturated_fat_g": 3, "carbs_g": 0, "sugar_g": 0, "fiber_g": 0, "protein_g": 13, "salt_g": 0.3}, "ingredients": null, "eco_score": null, "eco_detail_url": null}, {"id": "6622051", "name": "Naturaplan Bio Eier Schweiz aus Freilandhaltung 10 Stück 53g+", "price_chf": 8.2, "image": "https://www.coop.ch/img/produkte/155_155/RGB/6622051_001.jpg", "url": "https://www.coop.ch/de/p/6622051", "category": "Eier", "diet": [], "welfare_sustainability": ["Bio Suisse"], "nutrition_per_100g": {"energy_kj": 628, "fat_g": 11, "saturated_fat_g": 3, "carbs_g": 0, "sugar_g": 0, "fiber_g": 0, "protein_g": 13, "salt_g": 0.3}, "ingredients": null, "eco_score": "B_plus", "eco_detail_url": "https://contentimages.coop.ch/dambilder?id=7afb773c6982c118a77d994eeba3af57da2fa1fe"}, {"id": "6692969", "name": "Naturaplan Bio Fairtrade Joghurt Kokosnuss 2x180g", "price_chf": 1.6, "image": "https://www.coop.ch/img/produkte/155_155/RGB/6692969_001.jpg", "url": "https://www.coop.ch/de/p/6692969", "category": "Milchprodukte", "diet": ["Gekühlt"], "welfare_sustainability": ["Bio Suisse"], "nutrition_per_100g": {"energy_kj": 439, "fat_g": 5.1, "saturated_fat_g": 4, "carbs_g": 11, "sugar_g": 11, "fiber_g": 0, "protein_g": 3.7, "salt_g": 0.08}, "ingredients": "MILCH (homogenisiert, pasteurisiert [Schweiz]), Wasser, Zucker 7,6% (Schweiz), Kokosnussextrakt 5%, MILCHPROTEIN (Schweiz), Kokosraspeln 1,2%, Manioks", "eco_score": "A", "eco_detail_url": "https://contentimages.coop.ch/dambilder?id=fc9c3eb8f8def77e1524cfd3753849fa0d02275d"}, {"id": "6678951", "name": "Naturaplan Bio Fairtrade Joghurt Mango Passionsfrucht ohne Zuckerzusatz 2x150g", "price_chf": 1.9, "image": "https://www.coop.ch/img/produkte/155_155/RGB/6678951_001.jpg", "url": "https://www.coop.ch/de/p/6678951", "category": "Milchprodukte", "diet": ["Gekühlt"], "welfare_sustainability": ["Bio Suisse"], "nutrition_per_100g": {"energy_kj": 315, "fat_g": 2.9, "saturated_fat_g": 1.7, "carbs_g": 8.4, "sugar_g": 7.1, "fiber_g": 0, "protein_g": 3.8, "salt_g": 0.09}, "ingredients": "VOLLMILCH (homogenisiert, pasteurisiert [Schweiz]), Mangopüree 23% (Indien), Wasser, MILCHPROTEIN (Schweiz), Passionsfruchtsaft 2% (Sri Lanka), Maniokstärke, Zitronensaftkonzentrat, Lactase.", "eco_score": null, "eco_detail_url": null}, {"id": "6858887", "name": "Naturaplan Bio Fairtrade Joghurt Mokka 2x180g", "price_chf": 1.6, "image": "https://www.coop.ch/img/produkte/155_155/RGB/6858887_001.jpg", "url": "https://www.coop.ch/de/p/6858887", "category": "Milchprodukte", "diet": ["Gekühlt"], "welfare_sustainability": ["Bio Suisse"], "nutrition_per_100g": {"energy_kj": 428, "fat_g": 3.3, "saturated_fat_g": 2, "carbs_g": 14, "sugar_g": 13, "fiber_g": 0, "protein_g": 4, "salt_g": 0.1}, "ingredients": "MILCH (homogenisiert, pasteurisiert [Schweiz]), Zucker 9,3% (Schweiz), MILCHPROTEIN (Schweiz), Kaffeeextrakt 0,7%. Alle landwirtschaftlichen Zutaten s", "eco_score": null, "eco_detail_url": null}, {"id": "7437312", "name": "Naturaplan Bio Fairtrade Jogurt Vanille ohne Zuckerzusatz 2x150g", "price_chf": 1.9, "image": "https://www.coop.ch/img/produkte/155_155/RGB/7437312_001.jpg", "url": "https://www.coop.ch/de/p/7437312", "category": "Milchprodukte", "diet": ["Gekühlt", "Laktosefrei"], "welfare_sustainability": ["Bio Suisse"], "nutrition_per_100g": {"energy_kj": 258, "fat_g": 3.2, "saturated_fat_g": 1.9, "carbs_g": 4.1, "sugar_g": 3.7, "fiber_g": 0, "protein_g": 4.1, "salt_g": 0.1}, "ingredients": "MILCH (homogenisiert, pasteurisiert [Schweiz]), Wasser, MILCHPROTEIN (Schweiz), Wachsmaisstärke, Vanilleextrakt 0,2%, Lactase, Zitronensaftkonzentrat,", "eco_score": null, "eco_detail_url": null}, {"id": "7361247", "name": "Naturaplan Bio Fairtrade Zimt Ceylon gemahlen", "price_chf": 1.6, "image": "https://www.coop.ch/img/produkte/155_155/RGB/7361247_001.jpg", "url": "https://www.coop.ch/de/p/7361247", "category": "Vorräte & Gewürze", "diet": [], "welfare_sustainability": ["Fairtrade", "Bio Suisse"], "nutrition_per_100g": {"energy_kj": null, "fat_g": null, "saturated_fat_g": null, "carbs_g": null, "sugar_g": null, "fiber_g": null, "protein_g": null, "salt_g": null}, "ingredients": "Bio Zimt (Herkunft: siehe Datierungsfeld). Zimt wurde von Fairtrade-Produzenten angebaut, nach Fairtrade-Standards zertifiziert und gehandelt. Gesamta", "eco_score": "B_minus", "eco_detail_url": "https://contentimages.coop.ch/dambilder?id=a3bed1fb4a430073a632c9e1a2b191d585e0938a"}, {"id": "6408582", "name": "Naturaplan Bio Fenchel ca. 500g", "price_chf": 3.75, "image": "https://www.coop.ch/img/produkte/155_155/RGB/6408582_001.jpg", "url": "https://www.coop.ch/de/p/6408582", "category": "Gemüse", "diet": [], "welfare_sustainability": ["Bio Suisse"], "nutrition_per_100g": {"energy_kj": null, "fat_g": null, "saturated_fat_g": null, "carbs_g": null, "sugar_g": null, "fiber_g": null, "protein_g": null, "salt_g": null}, "ingredients": null, "eco_score": null, "eco_detail_url": null}, {"id": "3720246", "name": "Naturaplan Bio Gartengemüse", "price_chf": 5.4, "image": "https://www.coop.ch/img/produkte/155_155/RGB/3720246_001.jpg", "url": "https://www.coop.ch/de/p/3720246", "category": "Sonstiges", "diet": ["Tiefgekühlt"], "welfare_sustainability": ["Bio Suisse"], "nutrition_per_100g": {"energy_kj": 117, "fat_g": 0, "saturated_fat_g": 0, "carbs_g": 4, "sugar_g": 3.8, "fiber_g": 2.3, "protein_g": 1.8, "salt_g": 0.04}, "ingredients": "Karotten (A*), Zucchetti (B*), Broccoli (C*), Blumenkohl (D*). *Herkunft A-D: siehe Datierungsfeld Alle landwirtschaftlichen Zutaten stammenaus biolo", "eco_score": "A_plus", "eco_detail_url": "https://contentimages.coop.ch/dambilder?id=2e27b8fdb936e377c0b12d79f1baeab50c29cd24"}, {"id": "3031309", "name": "Naturaplan Bio Halbweissmehl", "price_chf": 3.2, "image": "https://www.coop.ch/img/produkte/155_155/RGB/3031309_001.jpg", "url": "https://www.coop.ch/de/p/3031309", "category": "Brot & Backwaren", "diet": [], "welfare_sustainability": ["Bio Suisse"], "nutrition_per_100g": {"energy_kj": 1465, "fat_g": 1.5, "saturated_fat_g": 0.3, "carbs_g": 68, "sugar_g": 0.7, "fiber_g": 4, "protein_g": 13, "salt_g": 0}, "ingredients": "Bio Halbweissmehl (WEIZEN). Kann Spuren von DINKEL, GERSTE, HAFER, KHORASAN-WEIZEN, ROGGEN enthalten. Allergiker-Infos: Siehe hervorgehobene Zutaten", "eco_score": "A_plus", "eco_detail_url": null}, {"id": "6058768", "name": "Naturaplan Bio Hanfsamen", "price_chf": 5.5, "image": "https://www.coop.ch/img/produkte/155_155/RGB/6058768_001.jpg", "url": "https://www.coop.ch/de/p/6058768", "category": "Sonstiges", "diet": [], "welfare_sustainability": ["Bio Suisse"], "nutrition_per_100g": {"energy_kj": 2584, "fat_g": 52, "saturated_fat_g": 4.8, "carbs_g": 5, "sugar_g": 1.9, "fiber_g": 6, "protein_g": 31, "salt_g": 0.03}, "ingredients": "Bio Hanfsamen (Herkunft: siehe Datierungsfeld).", "eco_score": "A_plus", "eco_detail_url": "https://contentimages.coop.ch/dambilder?id=06d6c23b1d6db258bfb09f2dc79a9d5b5c483d55"}]
+[
+ {
+  "id": "3443239",
+  "name": "Naturaplan Bio Demeter Basilikum im Topf",
+  "price_chf": 3.7,
+  "image": "https://www.coop.ch/img/produkte/155_155/RGB/3443239_001.jpg",
+  "url": "https://www.coop.ch/de/p/3443239",
+  "category": "Sonstiges",
+  "diet": [],
+  "welfare_sustainability": [
+   "Demeter",
+   "Bio Suisse"
+  ],
+  "nutrition_per_100g": {
+   "energy_kj": null,
+   "fat_g": null,
+   "saturated_fat_g": null,
+   "carbs_g": null,
+   "sugar_g": null,
+   "fiber_g": null,
+   "protein_g": null,
+   "salt_g": null
+  },
+  "ingredients": "Bio Basilikum (Demeter / Knospe [Herkunft: siehe Datierungsfeld]).",
+  "eco_score": "D_minus",
+  "eco_detail_url": "https://contentimages.coop.ch/dambilder?id=1dc9eb03c2b7a88a7a8b1c67840d0b13b20ce39d",
+  "subcategory": "Kräuter & Frisches"
+ },
+ {
+  "id": "6295171",
+  "name": "Naturaplan Bio Demeter Zucchetti gelb ca. 500g",
+  "price_chf": 5.5,
+  "image": "https://www.coop.ch/img/produkte/155_155/RGB/6295171_001.jpg",
+  "url": "https://www.coop.ch/de/p/6295171",
+  "category": "Gemüse",
+  "diet": [],
+  "welfare_sustainability": [
+   "Demeter",
+   "Bio Suisse"
+  ],
+  "nutrition_per_100g": {
+   "energy_kj": null,
+   "fat_g": null,
+   "saturated_fat_g": null,
+   "carbs_g": null,
+   "sugar_g": null,
+   "fiber_g": null,
+   "protein_g": null,
+   "salt_g": null
+  },
+  "ingredients": null,
+  "eco_score": null,
+  "eco_detail_url": null,
+  "subcategory": "Fruchtgemüse"
+ },
+ {
+  "id": "6292849",
+  "name": "Naturaplan Bio Eier Freilandhaltung Schweiz Demeter 6 Stück 53g+",
+  "price_chf": 6.95,
+  "image": "https://www.coop.ch/img/produkte/155_155/RGB/6292849_001.jpg",
+  "url": "https://www.coop.ch/de/p/6292849",
+  "category": "Eier",
+  "diet": [],
+  "welfare_sustainability": [
+   "Demeter",
+   "Bio Suisse"
+  ],
+  "nutrition_per_100g": {
+   "energy_kj": 628,
+   "fat_g": 11,
+   "saturated_fat_g": 3,
+   "carbs_g": 0,
+   "sugar_g": 0,
+   "fiber_g": 0,
+   "protein_g": 13,
+   "salt_g": 0.3
+  },
+  "ingredients": null,
+  "eco_score": null,
+  "eco_detail_url": null
+ },
+ {
+  "id": "6622051",
+  "name": "Naturaplan Bio Eier Schweiz aus Freilandhaltung 10 Stück 53g+",
+  "price_chf": 8.2,
+  "image": "https://www.coop.ch/img/produkte/155_155/RGB/6622051_001.jpg",
+  "url": "https://www.coop.ch/de/p/6622051",
+  "category": "Eier",
+  "diet": [],
+  "welfare_sustainability": [
+   "Bio Suisse"
+  ],
+  "nutrition_per_100g": {
+   "energy_kj": 628,
+   "fat_g": 11,
+   "saturated_fat_g": 3,
+   "carbs_g": 0,
+   "sugar_g": 0,
+   "fiber_g": 0,
+   "protein_g": 13,
+   "salt_g": 0.3
+  },
+  "ingredients": null,
+  "eco_score": "B_plus",
+  "eco_detail_url": "https://contentimages.coop.ch/dambilder?id=7afb773c6982c118a77d994eeba3af57da2fa1fe"
+ },
+ {
+  "id": "6692969",
+  "name": "Naturaplan Bio Fairtrade Joghurt Kokosnuss 2x180g",
+  "price_chf": 1.6,
+  "image": "https://www.coop.ch/img/produkte/155_155/RGB/6692969_001.jpg",
+  "url": "https://www.coop.ch/de/p/6692969",
+  "category": "Milchprodukte",
+  "diet": [
+   "Gekühlt"
+  ],
+  "welfare_sustainability": [
+   "Bio Suisse"
+  ],
+  "nutrition_per_100g": {
+   "energy_kj": 439,
+   "fat_g": 5.1,
+   "saturated_fat_g": 4,
+   "carbs_g": 11,
+   "sugar_g": 11,
+   "fiber_g": 0,
+   "protein_g": 3.7,
+   "salt_g": 0.08
+  },
+  "ingredients": "MILCH (homogenisiert, pasteurisiert [Schweiz]), Wasser, Zucker 7,6% (Schweiz), Kokosnussextrakt 5%, MILCHPROTEIN (Schweiz), Kokosraspeln 1,2%, Manioks",
+  "eco_score": "A",
+  "eco_detail_url": "https://contentimages.coop.ch/dambilder?id=fc9c3eb8f8def77e1524cfd3753849fa0d02275d",
+  "subcategory": "Joghurt"
+ },
+ {
+  "id": "6678951",
+  "name": "Naturaplan Bio Fairtrade Joghurt Mango Passionsfrucht ohne Zuckerzusatz 2x150g",
+  "price_chf": 1.9,
+  "image": "https://www.coop.ch/img/produkte/155_155/RGB/6678951_001.jpg",
+  "url": "https://www.coop.ch/de/p/6678951",
+  "category": "Milchprodukte",
+  "diet": [
+   "Gekühlt"
+  ],
+  "welfare_sustainability": [
+   "Bio Suisse"
+  ],
+  "nutrition_per_100g": {
+   "energy_kj": 315,
+   "fat_g": 2.9,
+   "saturated_fat_g": 1.7,
+   "carbs_g": 8.4,
+   "sugar_g": 7.1,
+   "fiber_g": 0,
+   "protein_g": 3.8,
+   "salt_g": 0.09
+  },
+  "ingredients": "VOLLMILCH (homogenisiert, pasteurisiert [Schweiz]), Mangopüree 23% (Indien), Wasser, MILCHPROTEIN (Schweiz), Passionsfruchtsaft 2% (Sri Lanka), Maniokstärke, Zitronensaftkonzentrat, Lactase.",
+  "eco_score": null,
+  "eco_detail_url": null,
+  "subcategory": "Joghurt"
+ },
+ {
+  "id": "6858887",
+  "name": "Naturaplan Bio Fairtrade Joghurt Mokka 2x180g",
+  "price_chf": 1.6,
+  "image": "https://www.coop.ch/img/produkte/155_155/RGB/6858887_001.jpg",
+  "url": "https://www.coop.ch/de/p/6858887",
+  "category": "Milchprodukte",
+  "diet": [
+   "Gekühlt"
+  ],
+  "welfare_sustainability": [
+   "Bio Suisse"
+  ],
+  "nutrition_per_100g": {
+   "energy_kj": 428,
+   "fat_g": 3.3,
+   "saturated_fat_g": 2,
+   "carbs_g": 14,
+   "sugar_g": 13,
+   "fiber_g": 0,
+   "protein_g": 4,
+   "salt_g": 0.1
+  },
+  "ingredients": "MILCH (homogenisiert, pasteurisiert [Schweiz]), Zucker 9,3% (Schweiz), MILCHPROTEIN (Schweiz), Kaffeeextrakt 0,7%. Alle landwirtschaftlichen Zutaten s",
+  "eco_score": null,
+  "eco_detail_url": null,
+  "subcategory": "Joghurt"
+ },
+ {
+  "id": "7437312",
+  "name": "Naturaplan Bio Fairtrade Jogurt Vanille ohne Zuckerzusatz 2x150g",
+  "price_chf": 1.9,
+  "image": "https://www.coop.ch/img/produkte/155_155/RGB/7437312_001.jpg",
+  "url": "https://www.coop.ch/de/p/7437312",
+  "category": "Milchprodukte",
+  "diet": [
+   "Gekühlt",
+   "Laktosefrei"
+  ],
+  "welfare_sustainability": [
+   "Bio Suisse"
+  ],
+  "nutrition_per_100g": {
+   "energy_kj": 258,
+   "fat_g": 3.2,
+   "saturated_fat_g": 1.9,
+   "carbs_g": 4.1,
+   "sugar_g": 3.7,
+   "fiber_g": 0,
+   "protein_g": 4.1,
+   "salt_g": 0.1
+  },
+  "ingredients": "MILCH (homogenisiert, pasteurisiert [Schweiz]), Wasser, MILCHPROTEIN (Schweiz), Wachsmaisstärke, Vanilleextrakt 0,2%, Lactase, Zitronensaftkonzentrat,",
+  "eco_score": null,
+  "eco_detail_url": null,
+  "subcategory": "Joghurt"
+ },
+ {
+  "id": "7361247",
+  "name": "Naturaplan Bio Fairtrade Zimt Ceylon gemahlen",
+  "price_chf": 1.6,
+  "image": "https://www.coop.ch/img/produkte/155_155/RGB/7361247_001.jpg",
+  "url": "https://www.coop.ch/de/p/7361247",
+  "category": "Vorräte & Gewürze",
+  "diet": [],
+  "welfare_sustainability": [
+   "Fairtrade",
+   "Bio Suisse"
+  ],
+  "nutrition_per_100g": {
+   "energy_kj": null,
+   "fat_g": null,
+   "saturated_fat_g": null,
+   "carbs_g": null,
+   "sugar_g": null,
+   "fiber_g": null,
+   "protein_g": null,
+   "salt_g": null
+  },
+  "ingredients": "Bio Zimt (Herkunft: siehe Datierungsfeld). Zimt wurde von Fairtrade-Produzenten angebaut, nach Fairtrade-Standards zertifiziert und gehandelt. Gesamta",
+  "eco_score": "B_minus",
+  "eco_detail_url": "https://contentimages.coop.ch/dambilder?id=a3bed1fb4a430073a632c9e1a2b191d585e0938a",
+  "subcategory": "Kräuter & Gewürze"
+ },
+ {
+  "id": "6408582",
+  "name": "Naturaplan Bio Fenchel ca. 500g",
+  "price_chf": 3.75,
+  "image": "https://www.coop.ch/img/produkte/155_155/RGB/6408582_001.jpg",
+  "url": "https://www.coop.ch/de/p/6408582",
+  "category": "Gemüse",
+  "diet": [],
+  "welfare_sustainability": [
+   "Bio Suisse"
+  ],
+  "nutrition_per_100g": {
+   "energy_kj": null,
+   "fat_g": null,
+   "saturated_fat_g": null,
+   "carbs_g": null,
+   "sugar_g": null,
+   "fiber_g": null,
+   "protein_g": null,
+   "salt_g": null
+  },
+  "ingredients": null,
+  "eco_score": null,
+  "eco_detail_url": null,
+  "subcategory": "Wurzel- & Knollengemüse"
+ },
+ {
+  "id": "3720246",
+  "name": "Naturaplan Bio Gartengemüse",
+  "price_chf": 5.4,
+  "image": "https://www.coop.ch/img/produkte/155_155/RGB/3720246_001.jpg",
+  "url": "https://www.coop.ch/de/p/3720246",
+  "category": "Sonstiges",
+  "diet": [
+   "Tiefgekühlt"
+  ],
+  "welfare_sustainability": [
+   "Bio Suisse"
+  ],
+  "nutrition_per_100g": {
+   "energy_kj": 117,
+   "fat_g": 0,
+   "saturated_fat_g": 0,
+   "carbs_g": 4,
+   "sugar_g": 3.8,
+   "fiber_g": 2.3,
+   "protein_g": 1.8,
+   "salt_g": 0.04
+  },
+  "ingredients": "Karotten (A*), Zucchetti (B*), Broccoli (C*), Blumenkohl (D*). *Herkunft A-D: siehe Datierungsfeld Alle landwirtschaftlichen Zutaten stammenaus biolo",
+  "eco_score": "A_plus",
+  "eco_detail_url": "https://contentimages.coop.ch/dambilder?id=2e27b8fdb936e377c0b12d79f1baeab50c29cd24",
+  "subcategory": "Gemüsemischungen & Hülsenfrüchte"
+ },
+ {
+  "id": "3031309",
+  "name": "Naturaplan Bio Halbweissmehl",
+  "price_chf": 3.2,
+  "image": "https://www.coop.ch/img/produkte/155_155/RGB/3031309_001.jpg",
+  "url": "https://www.coop.ch/de/p/3031309",
+  "category": "Brot & Backwaren",
+  "diet": [],
+  "welfare_sustainability": [
+   "Bio Suisse"
+  ],
+  "nutrition_per_100g": {
+   "energy_kj": 1465,
+   "fat_g": 1.5,
+   "saturated_fat_g": 0.3,
+   "carbs_g": 68,
+   "sugar_g": 0.7,
+   "fiber_g": 4,
+   "protein_g": 13,
+   "salt_g": 0
+  },
+  "ingredients": "Bio Halbweissmehl (WEIZEN). Kann Spuren von DINKEL, GERSTE, HAFER, KHORASAN-WEIZEN, ROGGEN enthalten. Allergiker-Infos: Siehe hervorgehobene Zutaten",
+  "eco_score": "A_plus",
+  "eco_detail_url": null,
+  "subcategory": "Back- & Mehlprodukte"
+ },
+ {
+  "id": "6058768",
+  "name": "Naturaplan Bio Hanfsamen",
+  "price_chf": 5.5,
+  "image": "https://www.coop.ch/img/produkte/155_155/RGB/6058768_001.jpg",
+  "url": "https://www.coop.ch/de/p/6058768",
+  "category": "Sonstiges",
+  "diet": [],
+  "welfare_sustainability": [
+   "Bio Suisse"
+  ],
+  "nutrition_per_100g": {
+   "energy_kj": 2584,
+   "fat_g": 52,
+   "saturated_fat_g": 4.8,
+   "carbs_g": 5,
+   "sugar_g": 1.9,
+   "fiber_g": 6,
+   "protein_g": 31,
+   "salt_g": 0.03
+  },
+  "ingredients": "Bio Hanfsamen (Herkunft: siehe Datierungsfeld).",
+  "eco_score": "A_plus",
+  "eco_detail_url": "https://contentimages.coop.ch/dambilder?id=06d6c23b1d6db258bfb09f2dc79a9d5b5c483d55",
+  "subcategory": "Samen & Kerne"
+ }
+]
