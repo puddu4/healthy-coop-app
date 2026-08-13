@@ -584,8 +584,31 @@
     return text.split("\n")
       .map(function(l){ return l.trim(); })
       .filter(function(l){ return l.length > 1 && l.length < 120; })
-      .map(function(l){ return l.replace(/^[-*•\d.)\s]+/, "").trim(); })
+      // Nur echte Aufzählungszeichen entfernen (-, *, •, "1.", "2)") – NICHT führende
+      // Mengenangaben wie "400 g Mehl", da sonst die Zahl verloren geht.
+      .map(function(l){ return l.replace(/^(?:[-*•]\s*|\d+[.)]\s+)/, "").trim(); })
       .filter(function(l){ return l.length > 1; });
+  }
+
+  // Findet den Zutaten-Abschnitt in Markdown/Text und schneidet ihn aus,
+  // damit nicht die ganze Seite (Navigation, Menüs etc.) als "Zutaten" interpretiert wird.
+  function isolateIngredientSection(text){
+    text = (text || "")
+      .replace(/!\[[^\]]*\]\([^)]*\)/g, "")       // Markdown-Bilder entfernen
+      .replace(/\[([^\]]*)\]\([^)]*\)/g, "$1");   // Markdown-Links -> nur Linktext
+    var lines = text.split("\n");
+    var headingRe = /^#{0,6}\s*(zutaten(liste)?|ingredients?)\s*(\([^)]*\))?\s*:?\s*$/i;
+    var startIdx = -1;
+    for (var i = 0; i < lines.length; i++) {
+      if (headingRe.test(lines[i].trim())) { startIdx = i + 1; break; }
+    }
+    if (startIdx === -1) return text;
+    var endRe = /^#{1,6}\s|^(zubereitung|anleitung|schritte|vorbereitung|methode|method|instructions?|directions?|preparation|nährwerte|n(a|ä)hrwertangaben|tipps?|hinweis|nutrition)\b/i;
+    var endIdx = lines.length;
+    for (var j = startIdx; j < lines.length; j++) {
+      if (endRe.test(lines[j].trim())) { endIdx = j; break; }
+    }
+    return lines.slice(startIdx, endIdx).join("\n");
   }
 
   function matchIngredientToProducts(line){
@@ -649,15 +672,36 @@
   document.getElementById("parseUrlBtn").addEventListener("click", function(){
     var url = document.getElementById("recipeUrl").value.trim();
     if (!url) return;
+    if (!/^https?:\/\//i.test(url)) url = "https://" + url;
     var statusEl = document.getElementById("recipeStatus");
     statusEl.innerHTML = '<span class="spinner"></span> Lade Rezept…';
-    var proxied = "https://corsproxy.io/?" + encodeURIComponent(url);
-    fetch(proxied)
-      .then(function(r){ if(!r.ok) throw new Error("http"); return r.text(); })
-      .then(function(html){
+
+    // Primär: r.jina.ai liefert bereinigten Lesetext (Markdown) direkt, ohne CORS-Probleme.
+    function viaReader(){
+      return fetch("https://r.jina.ai/" + url).then(function(r){
+        if (!r.ok) throw new Error("reader-http");
+        return r.text();
+      });
+    }
+    // Fallback: HTML per CORS-Proxy laden und Text extrahieren (falls der Reader-Dienst eine Seite nicht verarbeiten kann).
+    function viaProxyHtml(){
+      return fetch("https://corsproxy.io/?" + encodeURIComponent(url)).then(function(r){
+        if (!r.ok) throw new Error("proxy-http");
+        return r.text();
+      }).then(function(html){
         var doc = new DOMParser().parseFromString(html, "text/html");
-        var text = doc.body ? doc.body.innerText : "";
-        var lines = parseIngredientLines(text).slice(0, 60);
+        return doc.body ? doc.body.textContent : "";
+      });
+    }
+
+    viaReader().catch(viaProxyHtml)
+      .then(function(text){
+        var section = isolateIngredientSection(text);
+        var lines = parseIngredientLines(section).slice(0, 60);
+        if (lines.length === 0) {
+          statusEl.textContent = "Keine Zutaten erkannt. Bitte Zutaten stattdessen als Text einfügen.";
+          return;
+        }
         statusEl.textContent = "Seite geladen – bitte relevante Zutatenzeilen prüfen (" + lines.length + " Zeilen gefunden).";
         renderMatchResults(lines);
       })
