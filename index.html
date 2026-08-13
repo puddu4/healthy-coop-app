@@ -109,6 +109,8 @@
   .tag.eco.eco-good { background: #e5f5ea; color: #1e7a3c; }
   .tag.eco.eco-mid { background: #fdf3d9; color: #8a6a10; }
   .tag.eco.eco-bad { background: #fbe6e6; color: #b4302f; }
+  .eco-detail-link { font-size: 0.62rem; color: var(--muted); text-decoration: none; border-bottom: 1px dotted var(--muted); align-self: flex-start; }
+  .eco-detail-link:hover { color: var(--green); }
   .card .nutri { font-size: 0.68rem; color: var(--muted); }
   .card button {
     margin-top: auto;
@@ -469,12 +471,14 @@
     var ecoHtml = eLabel ? '<span class="tag eco ' + ecoClass + '">' + eLabel + '</span>' : "";
     var tagsHtml = ecoHtml + (p.diet||[]).concat(p.welfare_sustainability||[]).slice(0,3)
       .map(function(t){ return '<span class="tag' + (t==="Bio Suisse"?" bio":"") + '">' + t + '</span>'; }).join("");
+    var ecoDetailHtml = p.eco_detail_url ? '<a class="eco-detail-link" href="' + p.eco_detail_url + '" target="_blank" rel="noopener">Öko-Details ↗</a>' : "";
     card.innerHTML =
       '<img src="' + p.image + '" loading="lazy" onerror="this.style.opacity=0.2">' +
       '<div class="name">' + escapeHtml(p.name) + '</div>' +
       '<div class="price">' + (p.price_chf != null ? "CHF " + p.price_chf.toFixed(2) : "Preis unbekannt") + '</div>' +
       '<div class="tags">' + tagsHtml + '</div>' +
       (n.energy_kj != null ? '<div class="nutri">' + n.energy_kj + ' kJ · ' + (n.protein_g!=null?n.protein_g+'g Eiw.':'') + '</div>' : '') +
+      ecoDetailHtml +
       '<button type="button">+ Liste</button>';
     card.querySelector("button").addEventListener("click", function(){
       addToShoppingList(p);
