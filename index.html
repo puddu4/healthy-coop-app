@@ -572,12 +572,30 @@
 
   // ---------- Recipe ingredient parsing ----------
   var STOPWORDS = new Set(["g","kg","ml","l","el","tl","stk","stück","prise","etwas","ca","bio","frisch","frische","frischer","und","oder","in","für","gehackt","gewürfelt","gerieben","fein","grob","nach","geschmack","optional","ungefähr","dose","bund","zweig","zweige"]);
+  // Marken-/Label-Wörter, die beim Bestimmen des "Kernwortes" eines Produktnamens ignoriert werden,
+  // damit z.B. bei "Naturaplan Bio Joghurt a la grecque Honig" nicht "Honig" als Kern erkannt wird.
+  var CORE_SKIP_WORDS = new Set(["naturaplan","demeter","fairtrade","free","from","betty","bossi","loué","knospe"]);
 
   function tokenize(s){
     return (s||"").toLowerCase()
       .replace(/[.,;:()\/\-]/g, " ")
       .split(/\s+/)
       .filter(function(w){ return w.length > 1 && !/^\d+$/.test(w) && !STOPWORDS.has(w); });
+  }
+
+  // Die ersten 1-2 "echten" Wörter eines Produktnamens (ohne Marke/Label) gelten als Kern-Identität
+  // des Produkts, z.B. "Joghurt" bei "Naturaplan Bio Joghurt a la grecque Honig".
+  function coreTokensOf(name){
+    var toks = tokenize(name).filter(function(w){ return !CORE_SKIP_WORDS.has(w); });
+    return toks.filter(function(w){ return w.length >= 3; }).slice(0, 2);
+  }
+
+  // Zwei Wörter gelten als übereinstimmend, wenn sie identisch sind oder (ab 4 Zeichen) das eine
+  // im anderen enthalten ist (deckt einfache Mehrzahl-/Komposita-Fälle ab, z.B. "Zwiebel"/"Zwiebeln").
+  function tokensMatch(a, b){
+    if (a === b) return true;
+    if (a.length >= 4 && b.length >= 4 && (a.indexOf(b) !== -1 || b.indexOf(a) !== -1)) return true;
+    return false;
   }
 
   function parseIngredientLines(text){
@@ -616,15 +634,23 @@
     if (tokens.length === 0) return [];
     var scored = STATE.products.map(function(p){
       var nameTokens = tokenize(p.name);
+      var core = coreTokensOf(p.name);
+      var hasCoreMatch = false;
       var score = 0;
       tokens.forEach(function(t){
-        nameTokens.forEach(function(nt){
-          if (nt === t) score += 2;
-          else if (nt.indexOf(t) !== -1 || t.indexOf(nt) !== -1) score += 1;
-        });
+        var isCoreMatch = core.some(function(c){ return tokensMatch(t, c); });
+        if (isCoreMatch) {
+          hasCoreMatch = true;
+          score += 3;
+          return;
+        }
+        if (nameTokens.some(function(nt){ return tokensMatch(t, nt); })) score += 1;
       });
-      return { product: p, score: score };
-    }).filter(function(s){ return s.score > 0; });
+      return { product: p, score: score, hasCoreMatch: hasCoreMatch };
+    })
+      // Ein Produkt wird nur vorgeschlagen, wenn die Zutat eindeutig zur Kern-Identität des
+      // Produkts passt – nicht schon, weil irgendein Nebenwort (z.B. eine Geschmacksrichtung) übereinstimmt.
+      .filter(function(s){ return s.hasCoreMatch; });
     scored.sort(function(a,b){
       if (b.score !== a.score) return b.score - a.score;
       return combinedScore(b.product) - combinedScore(a.product);
