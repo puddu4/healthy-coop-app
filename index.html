@@ -590,11 +590,57 @@
     return toks.filter(function(w){ return w.length >= 3; }).slice(0, 2);
   }
 
-  // Zwei Wörter gelten als übereinstimmend, wenn sie identisch sind oder (ab 4 Zeichen) das eine
-  // im anderen enthalten ist (deckt einfache Mehrzahl-/Komposita-Fälle ab, z.B. "Zwiebel"/"Zwiebeln").
+  // Bekannte Wortgruppen, die dasselbe meinen (Schweizerdeutsch/Dialekt, gängige Alternativbegriffe) –
+  // deckt Fälle ab, wo die Schreibweise zu unterschiedlich für Fuzzy-Matching ist.
+  var SYNONYM_GROUPS = [
+    ["karotten", "karotte", "rüebli", "möhren", "mohrrüben"],
+    ["kartoffeln", "kartoffel", "härdöpfel", "erdäpfel"],
+    ["poulet", "pouletfleisch", "hähnchen", "hühnchen", "huhn", "hühnerfleisch"],
+    ["peperoni", "paprika"],
+    ["rande", "randen", "bete"],
+    ["nüsslisalat", "feldsalat"],
+    ["zucchetti", "zucchini"],
+    ["aubergine", "melanzani"],
+    ["champignon", "champignons", "egerling", "egerlinge"],
+    ["rahm", "sahne", "nidle", "nidel"],
+    ["glace", "eiscreme"]
+  ];
+  var SYNONYM_INDEX = {};
+  SYNONYM_GROUPS.forEach(function(group){ group.forEach(function(w){ SYNONYM_INDEX[w] = group; }); });
+
+  // Bearbeitungsdistanz (Levenshtein) für tolerante Schreibvarianten/Tippfehler, z.B. "Jogurt"/"Joghurt".
+  function levenshtein(a, b){
+    var m = a.length, n = b.length;
+    if (m === 0) return n;
+    if (n === 0) return m;
+    var prev = new Array(n + 1), curr = new Array(n + 1);
+    for (var j = 0; j <= n; j++) prev[j] = j;
+    for (var i = 1; i <= m; i++) {
+      curr[0] = i;
+      for (var j = 1; j <= n; j++) {
+        var cost = a[i - 1] === b[j - 1] ? 0 : 1;
+        curr[j] = Math.min(prev[j] + 1, curr[j - 1] + 1, prev[j - 1] + cost);
+      }
+      var tmp = prev; prev = curr; curr = tmp;
+    }
+    return prev[n];
+  }
+
+  function fuzzyMatch(a, b){
+    if (a.length < 4 || b.length < 4) return false; // zu kurze Wörter -> zu unsicher
+    if (Math.abs(a.length - b.length) > 2) return false;
+    var threshold = Math.max(a.length, b.length) >= 7 ? 2 : 1;
+    return levenshtein(a, b) <= threshold;
+  }
+
+  // Zwei Wörter gelten als übereinstimmend, wenn sie identisch sind, in derselben Synonymgruppe stehen,
+  // (ab 4 Zeichen) das eine im anderen enthalten ist (Mehrzahl-/Komposita-Fälle, z.B. "Zwiebel"/"Zwiebeln"),
+  // oder sich nur durch 1-2 Zeichen unterscheiden (Schreibvarianten/Tippfehler, z.B. "Jogurt"/"Joghurt").
   function tokensMatch(a, b){
     if (a === b) return true;
+    if (SYNONYM_INDEX[a] && SYNONYM_INDEX[a].indexOf(b) !== -1) return true;
     if (a.length >= 4 && b.length >= 4 && (a.indexOf(b) !== -1 || b.indexOf(a) !== -1)) return true;
+    if (fuzzyMatch(a, b)) return true;
     return false;
   }
 
