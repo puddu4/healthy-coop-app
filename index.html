@@ -126,6 +126,7 @@
   .empty { text-align: center; color: var(--muted); padding: 40px 10px; }
 
   .section-title { font-size: 1rem; font-weight: 700; margin: 18px 0 8px; }
+  .subsection-title { font-size: 0.78rem; font-weight: 600; color: var(--muted); margin: 12px 0 6px; text-transform: uppercase; letter-spacing: 0.03em; padding-left: 8px; border-left: 3px solid var(--green); }
   .card.list { flex-direction: row; align-items: center; }
   .card.list img { width: 56px; height: 56px; flex-shrink: 0; }
   .card.list .info { flex: 1; min-width: 0; }
@@ -461,6 +462,19 @@
   // Sinnvolle Einkaufs-Reihenfolge: frische Produkte zuerst, Vorräte/Getränke danach, Sonstiges zuletzt.
   var CATEGORY_ORDER = ["Gemüse", "Früchte", "Fleisch & Fisch", "Milchprodukte", "Eier", "Brot & Backwaren", "Vorräte & Gewürze", "Getränke", "Sonstiges"];
 
+  // Innerhalb mancher Kategorien gibt es deutlich unterschiedliche Produktarten
+  // (z.B. Poulet vs. Rind bei Fleisch, Milch vs. Joghurt bei Milchprodukten) –
+  // diese werden zusätzlich per "subcategory"-Feld (in den Produktdaten) unterteilt.
+  var SUBCATEGORY_ORDER = {
+    "Fleisch & Fisch": ["Poulet", "Rind", "Schwein", "Pute", "Fisch"],
+    "Milchprodukte": ["Milch", "Joghurt", "Skyr & Kefir", "Quark & Frischkäse", "Butter & Rahm"],
+    "Gemüse": ["Wurzel- & Knollengemüse", "Blattgemüse", "Kohlgemüse", "Fruchtgemüse", "Pilze", "Mais & Hülsenfrüchte"],
+    "Früchte": ["Kernobst", "Beeren", "Südfrüchte", "Trockenfrüchte", "Fruchtmus"],
+    "Brot & Backwaren": ["Brot", "Back- & Mehlprodukte"],
+    "Vorräte & Gewürze": ["Kräuter & Gewürze", "Öl & Essig", "Getreide & Beilagen", "Back- & Mehlprodukte"],
+    "Sonstiges": ["Gemüsemischungen & Hülsenfrüchte", "Tofu & Fleischersatz", "Fertiggerichte", "Saucen & Dips", "Samen & Kerne", "Teigwaren", "Kräuter & Frisches"]
+  };
+
   function groupByCategory(list){
     var map = {};
     list.forEach(function(p){
@@ -471,6 +485,44 @@
     var known = CATEGORY_ORDER.filter(function(c){ return map[c]; });
     var extra = Object.keys(map).filter(function(c){ return CATEGORY_ORDER.indexOf(c) === -1; }).sort();
     return known.concat(extra).map(function(c){ return { category: c, items: map[c] }; });
+  }
+
+  // Teilt eine Produktliste (bereits auf eine Kategorie eingegrenzt) nach subcategory auf,
+  // sofern für diese Kategorie eine Unterkategorie-Reihenfolge definiert ist. Gibt sonst null zurück.
+  function groupBySubcategory(category, items){
+    var order = SUBCATEGORY_ORDER[category];
+    if (!order) return null;
+    var map = {};
+    items.forEach(function(p){
+      var s = p.subcategory || "Weitere";
+      if (!map[s]) map[s] = [];
+      map[s].push(p);
+    });
+    var known = order.filter(function(s){ return map[s]; });
+    var extra = Object.keys(map).filter(function(s){ return order.indexOf(s) === -1; }).sort();
+    return known.concat(extra).map(function(s){ return { subcategory: s, items: map[s] }; });
+  }
+
+  function appendProductGroup(container, items){
+    var sub = document.createElement("div");
+    sub.className = "grid";
+    items.forEach(function(p){ sub.appendChild(productCard(p)); });
+    container.appendChild(sub);
+  }
+
+  function appendCategoryItems(container, category, items){
+    var subgroups = groupBySubcategory(category, items);
+    if (!subgroups || subgroups.length <= 1) {
+      appendProductGroup(container, items);
+      return;
+    }
+    subgroups.forEach(function(sg){
+      var subHeading = document.createElement("div");
+      subHeading.className = "subsection-title";
+      subHeading.textContent = sg.subcategory;
+      container.appendChild(subHeading);
+      appendProductGroup(container, sg.items);
+    });
   }
 
   function renderProducts(){
@@ -484,24 +536,21 @@
     }
     if (STATE.filters.category === null) {
       // Bei "Alle" mischen sich mehrere Kategorien -> nach Kategorie gruppiert anzeigen,
-      // damit man z.B. nicht Joghurt zwischen Fleisch und Gemüse findet.
+      // damit man z.B. nicht Joghurt zwischen Fleisch und Gemüse findet. Innerhalb jeder
+      // Kategorie zusätzlich nach Unterkategorie (z.B. Poulet/Rind), wo sinnvoll.
       grid.classList.remove("grid");
       groupByCategory(list).forEach(function(g){
         var heading = document.createElement("div");
         heading.className = "section-title";
         heading.textContent = g.category;
         grid.appendChild(heading);
-        var sub = document.createElement("div");
-        sub.className = "grid";
-        g.items.forEach(function(p){ sub.appendChild(productCard(p)); });
-        grid.appendChild(sub);
+        appendCategoryItems(grid, g.category, g.items);
       });
     } else {
-      // Eine einzelne Kategorie ist bereits gefiltert -> keine zusätzliche Gruppierung nötig.
-      grid.classList.add("grid");
-      list.forEach(function(p){
-        grid.appendChild(productCard(p));
-      });
+      // Eine einzelne Kategorie ist bereits gefiltert -> keine Kategorie-Überschrift nötig,
+      // aber ggf. weiterhin nach Unterkategorie gruppieren (z.B. Poulet getrennt von Rind).
+      grid.classList.remove("grid");
+      appendCategoryItems(grid, STATE.filters.category, list);
     }
   }
 
