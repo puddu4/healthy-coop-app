@@ -174,7 +174,7 @@
 <body>
 
 <header>
-  <h1>Healthy Coop</h1>
+  <h1>🌱 Healthy Coop</h1>
   <div class="status" id="statusLine">Lade Produkte…</div>
 </header>
 
@@ -279,7 +279,7 @@
   // ---------- Load products (with offline fallback) ----------
   function loadProducts(){
     var statusLine = document.getElementById("statusLine");
-    var SHARD_COUNT = 8;
+    var SHARD_COUNT = 9;
     var shardUrls = [];
     for (var i = 0; i < SHARD_COUNT; i++) shardUrls.push("data/products_" + i + ".json");
     Promise.all(shardUrls.map(function(u){
